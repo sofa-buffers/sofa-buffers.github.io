@@ -1,12 +1,468 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="refresh" content="0; url=https://github.com/sofa-buffers">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Redirecting to SofaBuffers</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SofaBuffers - Structured Objects For Anyone</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #0f0f23 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem 3rem;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #00d4ff 0%, #7b2ff7 50%, #f107ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.5));
+            }
+            to {
+                filter: drop-shadow(0 0 40px rgba(241, 7, 255, 0.8));
+            }
+        }
+
+        .tagline {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+            color: #00d4ff;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #a0a0ff;
+            font-style: italic;
+            margin-bottom: 3rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #ffffff;
+            background: linear-gradient(135deg, #7b2ff7 0%, #f107ff 100%);
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(123, 47, 247, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(241, 7, 255, 0.6);
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        /* Icon Grid */
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin: 5rem 0;
+            padding: 2rem 0;
+        }
+
+        .icon-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid rgba(0, 212, 255, 0.2);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .icon-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(241, 7, 255, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .icon-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(241, 7, 255, 0.6);
+            box-shadow: 0 20px 60px rgba(123, 47, 247, 0.4);
+        }
+
+        .icon-card:hover::before {
+            opacity: 1;
+        }
+
+        .icon-wrapper {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 2rem;
+            position: relative;
+            transition: transform 0.4s ease;
+        }
+
+        .icon-card:hover .icon-wrapper {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .icon-svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 10px 20px rgba(0, 212, 255, 0.3));
+        }
+
+        .icon-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #00d4ff 0%, #7b2ff7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .icon-description {
+            font-size: 1rem;
+            color: #a0a0ff;
+            line-height: 1.6;
+        }
+
+        /* Features Section */
+        .features {
+            margin: 5rem 0;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #00d4ff 0%, #f107ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .quote {
+            font-size: 1.8rem;
+            font-style: italic;
+            color: #00d4ff;
+            margin: 3rem 0;
+            padding: 2rem;
+            border-left: 5px solid #7b2ff7;
+            background: rgba(0, 212, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 5rem;
+            border-top: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .footer-text {
+            color: #a0a0ff;
+            font-size: 1.1rem;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(0, 212, 255, 0.6);
+            border-radius: 50%;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            50% { transform: translate(100px, -100px) scale(1.5); }
+        }
+
+        .particle:nth-child(2n) {
+            animation-duration: 15s;
+            animation-delay: -5s;
+            background: rgba(123, 47, 247, 0.6);
+        }
+
+        .particle:nth-child(3n) {
+            animation-duration: 25s;
+            animation-delay: -10s;
+            background: rgba(241, 7, 255, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 3rem;
+            }
+            .tagline {
+                font-size: 1.8rem;
+            }
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            .icon-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .quote {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
 </head>
 <body>
-	<p>Redirecting to <a href="https://github.com/sofa-buffers">SofaBuffers GitHub</a>...</p>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="particle" style="left: 10%; top: 20%; animation-delay: 0s;"></div>
+        <div class="particle" style="left: 80%; top: 40%; animation-delay: -3s;"></div>
+        <div class="particle" style="left: 50%; top: 60%; animation-delay: -6s;"></div>
+        <div class="particle" style="left: 30%; top: 80%; animation-delay: -9s;"></div>
+        <div class="particle" style="left: 70%; top: 10%; animation-delay: -12s;"></div>
+        <div class="particle" style="left: 20%; top: 50%; animation-delay: -15s;"></div>
+    </div>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <div class="logo">SofaBuffers</div>
+            <div class="tagline">Structured Objects For Anyone</div>
+            <div class="subtitle">...so optimized, feels amazing</div>
+            <a href="https://github.com/sofa-buffers" class="cta-button" target="_blank">View on GitHub →</a>
+        </div>
+
+        <!-- Icon Grid -->
+        <div class="icon-grid">
+            <!-- Streaming Icon -->
+            <div class="icon-card">
+                <div class="icon-wrapper">
+                    <svg class="icon-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#7b2ff7;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M30 100 L80 100 L90 85 L110 115 L120 85 L140 115 L150 100 L170 100"
+                              stroke="url(#grad1)" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="30" cy="100" r="8" fill="#00d4ff">
+                            <animate attributeName="r" from="8" to="12" dur="1s" repeatCount="indefinite" />
+                        </circle>
+                        <circle cx="170" cy="100" r="8" fill="#7b2ff7">
+                            <animate attributeName="r" from="8" to="12" dur="1s" repeatCount="indefinite" begin="0.5s" />
+                        </circle>
+                        <path d="M165 95 L175 100 L165 105" stroke="#7b2ff7" stroke-width="4" fill="none" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="icon-title">Streams Objects From Anywhere</div>
+                <div class="icon-description">TLV-based streaming for minimal resource usage</div>
+            </div>
+
+            <!-- Performance Icon -->
+            <div class="icon-card">
+                <div class="icon-wrapper">
+                    <svg class="icon-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#7b2ff7;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#f107ff;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <circle cx="100" cy="100" r="70" stroke="url(#grad2)" stroke-width="8" fill="none"/>
+                        <path d="M100 40 L100 100 L140 130" stroke="url(#grad2)" stroke-width="6" fill="none" stroke-linecap="round">
+                            <animateTransform attributeName="transform" type="rotate" from="0 100 100" to="360 100 100" dur="3s" repeatCount="indefinite"/>
+                        </path>
+                        <circle cx="100" cy="100" r="10" fill="#f107ff"/>
+                        <text x="100" y="175" text-anchor="middle" font-size="20" fill="#00d4ff" font-weight="bold">FAST</text>
+                    </svg>
+                </div>
+                <div class="icon-title">Seriously Optimized</div>
+                <div class="icon-description">Lightweight & efficient for embedded systems</div>
+            </div>
+
+            <!-- Buffer Icon -->
+            <div class="icon-card">
+                <div class="icon-wrapper">
+                    <svg class="icon-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#f107ff;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <rect x="30" y="40" width="140" height="30" rx="5" fill="url(#grad3)" opacity="0.9">
+                            <animate attributeName="opacity" from="0.3" to="0.9" dur="1.5s" repeatCount="indefinite" begin="0s"/>
+                        </rect>
+                        <rect x="30" y="85" width="140" height="30" rx="5" fill="url(#grad3)" opacity="0.7">
+                            <animate attributeName="opacity" from="0.3" to="0.9" dur="1.5s" repeatCount="indefinite" begin="0.3s"/>
+                        </rect>
+                        <rect x="30" y="130" width="140" height="30" rx="5" fill="url(#grad3)" opacity="0.5">
+                            <animate attributeName="opacity" from="0.3" to="0.9" dur="1.5s" repeatCount="indefinite" begin="0.6s"/>
+                        </rect>
+                    </svg>
+                </div>
+                <div class="icon-title">Compact Binary Format</div>
+                <div class="icon-description">Minimal overhead, maximum efficiency</div>
+            </div>
+
+            <!-- Cross-Platform Icon -->
+            <div class="icon-card">
+                <div class="icon-wrapper">
+                    <svg class="icon-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#f107ff;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#00d4ff;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <circle cx="100" cy="100" r="60" stroke="url(#grad4)" stroke-width="6" fill="none">
+                            <animate attributeName="stroke-dasharray" from="0 377" to="377 0" dur="2s" repeatCount="indefinite"/>
+                        </circle>
+                        <line x1="40" y1="100" x2="160" y2="100" stroke="url(#grad4)" stroke-width="4"/>
+                        <line x1="100" y1="40" x2="100" y2="160" stroke="url(#grad4)" stroke-width="4"/>
+                        <circle cx="40" cy="100" r="8" fill="#00d4ff"/>
+                        <circle cx="160" cy="100" r="8" fill="#f107ff"/>
+                        <circle cx="100" cy="40" r="8" fill="#7b2ff7"/>
+                        <circle cx="100" cy="160" r="8" fill="#00d4ff"/>
+                    </svg>
+                </div>
+                <div class="icon-title">Runs On All Architectures</div>
+                <div class="icon-description">From tiny MCUs to cloud infrastructure</div>
+            </div>
+
+            <!-- Code Generation Icon -->
+            <div class="icon-card">
+                <div class="icon-wrapper">
+                    <svg class="icon-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="grad5" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#7b2ff7;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#00d4ff;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <rect x="40" y="40" width="120" height="120" rx="10" stroke="url(#grad5)" stroke-width="6" fill="none"/>
+                        <line x1="60" y1="70" x2="100" y2="70" stroke="#00d4ff" stroke-width="4" stroke-linecap="round">
+                            <animate attributeName="x2" from="60" to="100" dur="1s" repeatCount="indefinite"/>
+                        </line>
+                        <line x1="60" y1="95" x2="130" y2="95" stroke="#7b2ff7" stroke-width="4" stroke-linecap="round">
+                            <animate attributeName="x2" from="60" to="130" dur="1.2s" repeatCount="indefinite"/>
+                        </line>
+                        <line x1="60" y1="120" x2="110" y2="120" stroke="#f107ff" stroke-width="4" stroke-linecap="round">
+                            <animate attributeName="x2" from="60" to="110" dur="0.9s" repeatCount="indefinite"/>
+                        </line>
+                    </svg>
+                </div>
+                <div class="icon-title">Automated Code Generation</div>
+                <div class="icon-description">YAML/JSON definitions → Multi-language code</div>
+            </div>
+
+            <!-- Lightweight Icon -->
+            <div class="icon-card">
+                <div class="icon-wrapper">
+                    <svg class="icon-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="grad6" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#f107ff;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <polygon points="100,30 160,80 140,150 60,150 40,80" stroke="url(#grad6)" stroke-width="6" fill="none"/>
+                        <circle cx="100" cy="100" r="30" fill="url(#grad6)" opacity="0.3">
+                            <animate attributeName="r" from="20" to="40" dur="2s" repeatCount="indefinite"/>
+                            <animate attributeName="opacity" from="0.5" to="0.1" dur="2s" repeatCount="indefinite"/>
+                        </circle>
+                        <text x="100" y="110" text-anchor="middle" font-size="40" fill="#fff" font-weight="bold">μ</text>
+                    </svg>
+                </div>
+                <div class="icon-title">Tiny Footprint</div>
+                <div class="icon-description">Perfect for resource-constrained devices</div>
+            </div>
+        </div>
+
+        <!-- Quote Section -->
+        <div class="features">
+            <div class="section-title">Why SofaBuffers?</div>
+            <div class="quote">
+                "Because JSON is too fat, and Protobuf is too Google."
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-text">
+                Built for embedded developers and cloud engineers 🚀
+            </div>
+        </div>
+    </div>
 </body>
 </html>
