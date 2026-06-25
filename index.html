@@ -20,16 +20,11 @@
     <meta property="og:description" content="A compact, streaming-first binary serialization format. Because JSON is too fat, and Protobuf is too Google.">
     <meta property="og:url" content="https://sofa-buffers.github.io/">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://sofa-buffers.github.io/assets/sofabuffers_logo.png">
-    <meta property="og:image:width" content="1024">
-    <meta property="og:image:height" content="320">
-    <meta property="og:image:alt" content="SofaBuffers — Structured Objects For Anyone">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="SofaBuffers — Structured Objects For Anyone">
     <meta name="twitter:description" content="A compact, streaming-first binary serialization format. Because JSON is too fat, and Protobuf is too Google.">
-    <meta name="twitter:image" content="https://sofa-buffers.github.io/assets/sofabuffers_logo.png">
 
     <link rel="icon" type="image/png" href="assets/sofabuffers_icon.png">
     <link rel="apple-touch-icon" href="assets/sofabuffers_icon.png">
@@ -46,8 +41,6 @@
       "description": "SofaBuffers is a compact, streaming-first binary serialization format for structured data, with code generation for C/C++, Rust, Go, Python, TypeScript, Java and C#.",
       "license": "https://opensource.org/licenses/MIT",
       "url": "https://sofa-buffers.github.io/",
-      "image": "https://sofa-buffers.github.io/assets/sofabuffers_logo.png",
-      "logo": "https://sofa-buffers.github.io/assets/sofabuffers_icon.png",
       "codeRepository": "https://github.com/sofa-buffers",
       "programmingLanguage": ["C", "C++", "Rust", "Go", "Python", "TypeScript", "Java", "C#"],
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
@@ -192,12 +185,6 @@
             background: linear-gradient(120deg, var(--fg) 30%, var(--accent) 75%, var(--accent-2));
             -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
         }
-        h1.hero-logo { margin: 0 auto 1.4rem; line-height: 0; }
-        h1.hero-logo img {
-            width: min(560px, 86vw); height: auto; display: block; margin: 0 auto;
-            background: #ffffff; padding: 18px 28px; border-radius: 22px;
-            border: 1px solid var(--border); box-shadow: var(--shadow);
-        }
         .tagline { font-size: clamp(1.2rem, 3.5vw, 1.7rem); color: var(--fg); font-weight: 600; margin-top: 0.8rem; }
         .subtitle {
             font-size: clamp(1rem, 2.5vw, 1.2rem); color: var(--fg-muted);
@@ -311,7 +298,7 @@
         .lang small { display: block; color: var(--fg-dim); font-weight: 500; font-size: 0.78rem; }
 
         /* ---------- CTA band ---------- */
-        .cta-band { text-align: center; }
+        .cta-band { text-align: center; padding: 5rem 1.5rem 3rem; }
         .cta-band .box {
             background: linear-gradient(135deg, var(--surface), var(--surface-2));
             border: 1px solid var(--border); border-radius: 24px; padding: 3.5rem 2rem;
@@ -373,11 +360,8 @@
         <!-- ===== Hero ===== -->
         <section class="hero wrap">
             <span class="pill"><span class="dot"></span> Streaming-first binary serialization · MIT licensed</span>
-            <h1 class="hero-logo">
-                <img src="assets/sofabuffers_logo.png" width="1024" height="320"
-                     alt="SofaBuffers — Structured Objects For Anyone"
-                     fetchpriority="high" decoding="async">
-            </h1>
+            <h1 class="logo">SofaBuffers</h1>
+            <p class="tagline">Structured Objects For Anyone</p>
             <p class="subtitle">A compact, streamable binary format for structured data — tightly packed, schema-driven, and tiny enough for the smallest microcontroller yet fast enough for the cloud.</p>
             <div class="hero-cta">
                 <a class="btn btn-primary" href="https://github.com/sofa-buffers" target="_blank" rel="noopener">
