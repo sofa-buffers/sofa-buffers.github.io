@@ -134,6 +134,12 @@
             height: 64px;
         }
         .brand { display: flex; align-items: center; gap: 0.6rem; font-weight: 700; font-size: 1.15rem; }
+        .nav-inner > .brand img {
+            height: 34px; width: auto; display: block;
+            background: #ffffff; padding: 4px 9px; border-radius: 9px;
+            border: 1px solid var(--border);
+        }
+        @media (max-width: 480px) { .nav-inner > .brand img { height: 28px; } }
         .brand .mark { font-size: 1.4rem; }
         .brand .name {
             background: linear-gradient(120deg, var(--accent), var(--accent-2));
@@ -339,9 +345,6 @@
     <!-- ===== Nav ===== -->
     <header class="nav">
         <div class="wrap nav-inner">
-            <a class="brand" href="#top" aria-label="SofaBuffers home">
-                <span class="mark">🛋️</span><span class="name">SofaBuffers</span>
-            </a>
             <nav class="nav-links">
                 <a class="hide-sm" href="#features">Features</a>
                 <a class="hide-sm" href="#why">Why</a>
@@ -353,6 +356,9 @@
                     <svg id="themeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
                 </button>
             </nav>
+            <a class="brand" href="#top" aria-label="SofaBuffers home">
+                <img src="assets/sofabuffers_logo.png" alt="SofaBuffers" width="1024" height="320">
+            </a>
         </div>
     </header>
 
