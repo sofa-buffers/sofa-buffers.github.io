@@ -20,7 +20,7 @@ It is tightly packed (varint + zig-zag encoding), fully **streamable** on both s
 - 🏠 **Organization:** https://github.com/sofa-buffers
 - 📖 **Documentation & spec:** https://github.com/sofa-buffers/documentation
 - ⚙️ **Code generator:** https://github.com/sofa-buffers/generator
-- **Core libraries:** [C/C++](https://github.com/sofa-buffers/corelib-c-cpp) · [Rust](https://github.com/sofa-buffers/corelib-rs) · [Go](https://github.com/sofa-buffers/corelib-go) · [Python](https://github.com/sofa-buffers/corelib-py) · [TypeScript](https://github.com/sofa-buffers/corelib-ts) · [Java](https://github.com/sofa-buffers/corelib-java) · [C#](https://github.com/sofa-buffers/corelib-cs)
+- **Core libraries:** [C/C++](https://github.com/sofa-buffers/corelib-c-cpp) · [C++](https://github.com/sofa-buffers/corelib-cpp) · [Rust](https://github.com/sofa-buffers/corelib-rs) · [Go](https://github.com/sofa-buffers/corelib-go) · [Python](https://github.com/sofa-buffers/corelib-py) · [TypeScript](https://github.com/sofa-buffers/corelib-ts) · [Java](https://github.com/sofa-buffers/corelib-java) · [C#](https://github.com/sofa-buffers/corelib-cs)
 
 ## Developing the page
 
