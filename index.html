@@ -195,7 +195,14 @@
             background: linear-gradient(120deg, var(--fg) 30%, var(--accent) 75%, var(--accent-2));
             -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
         }
-        .tagline { font-size: clamp(1.2rem, 3.5vw, 1.7rem); color: var(--fg); font-weight: 600; margin-top: 0.8rem; }
+        .tagline {
+            font-size: clamp(1.2rem, 3.5vw, 1.7rem); color: var(--fg); font-weight: 600; margin-top: 0.8rem;
+            min-height: 1.6em; transition: opacity 0.35s ease;
+        }
+        .tagline.fade { opacity: 0; }
+        .tagline .sofa-x b { color: var(--accent); font-weight: 800; }
+        .tagline.sofa-stack { display: flex; flex-direction: column; gap: 0.15rem; min-height: 0; font-size: clamp(1rem, 2.6vw, 1.3rem); }
+        .tagline-sub { font-style: italic; color: var(--fg-muted); font-size: clamp(0.92rem, 2vw, 1.05rem); margin-top: 0.15rem; }
         .subtitle {
             font-size: clamp(1rem, 2.5vw, 1.2rem); color: var(--fg-muted);
             max-width: 640px; margin: 1.1rem auto 2.2rem;
@@ -235,8 +242,10 @@
         .card h3 { font-size: 1.18rem; margin-bottom: 0.5rem; }
         .card p { color: var(--fg-muted); font-size: 0.96rem; }
 
+        /* ---------- Section bands (alternating soft background) ---------- */
+        .band, .why { background: var(--bg-soft); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
         /* ---------- Why / comparison ---------- */
-        .why { background: var(--bg-soft); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
         .compare { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 1rem; }
         .compare .row {
             display: flex; gap: 0.8rem; align-items: flex-start;
@@ -372,7 +381,8 @@
         <section class="hero wrap">
             <span class="pill"><span class="dot"></span> Streaming-first binary serialization · MIT licensed</span>
             <h1 class="logo">SofaBuffers</h1>
-            <p class="tagline">Structured Objects For Anyone</p>
+            <p class="tagline" id="sofaTagline"><span class="sofa-x"><b>S</b>tructured <b>O</b>bjects <b>F</b>or <b>A</b>nyone</span></p>
+            <p class="tagline-sub">… so optimized, feels amazing.</p>
             <p class="subtitle">A compact, streamable binary format for structured data — tightly packed, schema-driven, and tiny enough for the smallest microcontroller yet fast enough for the cloud.</p>
             <div class="hero-cta">
                 <a class="btn btn-primary" href="https://github.com/sofa-buffers" target="_blank" rel="noopener">
@@ -393,22 +403,24 @@
         </section>
 
         <!-- ===== Languages ===== -->
-        <section id="languages" class="wrap">
-            <div class="sec-head reveal">
-                <span class="eyebrow">Core libraries</span>
-                <h2 class="sec-title">One format, eight languages</h2>
-                <p>Each core library implements the same streamable wire format and shares a common suite of conformance test vectors — and some languages ship more than one build, each tuned for a different target.</p>
-            </div>
-            <div class="lang-grid reveal">
-                <a class="lang" href="https://github.com/sofa-buffers/corelib-c-cpp" target="_blank" rel="noopener"><span class="badge" style="background:#5a6fb5">C</span><span>C / C++<small>Heap-free C99 / C++20 for embedded MCUs</small></span></a>
-                <a class="lang" href="https://github.com/sofa-buffers/corelib-cpp" target="_blank" rel="noopener"><span class="badge" style="background:#00599c">C++</span><span>C++<small>Pure C++20, no C backend, speed-tuned</small></span></a>
-                <a class="lang" href="https://github.com/sofa-buffers/corelib-rs" target="_blank" rel="noopener"><span class="badge" style="background:#c66a3a">Rs</span><span>Rust<small>High-speed std build for big machines</small></span></a>
-                <a class="lang" href="https://github.com/sofa-buffers/corelib-rs-no-std" target="_blank" rel="noopener"><span class="badge" style="background:#8c5733">Rs</span><span>Rust<small>#![no_std], heap-free, for microcontrollers</small></span></a>
-                <a class="lang" href="https://github.com/sofa-buffers/corelib-go" target="_blank" rel="noopener"><span class="badge" style="background:#2aa3c4">Go</span><span>Go<small>Streaming, dependency-free runtime core</small></span></a>
-                <a class="lang" href="https://github.com/sofa-buffers/corelib-py" target="_blank" rel="noopener"><span class="badge" style="background:#3f7aab">Py</span><span>Python<small>Pure Python 3.9+, zero dependencies</small></span></a>
-                <a class="lang" href="https://github.com/sofa-buffers/corelib-ts" target="_blank" rel="noopener"><span class="badge" style="background:#2f74c0">Ts</span><span>TypeScript<small>Runs on Node, browsers, Deno &amp; Bun</small></span></a>
-                <a class="lang" href="https://github.com/sofa-buffers/corelib-java" target="_blank" rel="noopener"><span class="badge" style="background:#b07219">Jv</span><span>Java<small>Allocation-light, runs anywhere a JVM does</small></span></a>
-                <a class="lang" href="https://github.com/sofa-buffers/corelib-cs" target="_blank" rel="noopener"><span class="badge" style="background:#6a4d9c">C#</span><span>C#<small>Allocation-light .NET, cloud-ready</small></span></a>
+        <section id="languages" class="band">
+            <div class="wrap">
+                <div class="sec-head reveal">
+                    <span class="eyebrow">Core libraries</span>
+                    <h2 class="sec-title">One format, eight languages</h2>
+                    <p>Each core library implements the same streamable wire format and shares a common suite of conformance test vectors — and some languages ship more than one build, each tuned for a different target.</p>
+                </div>
+                <div class="lang-grid reveal">
+                    <a class="lang" href="https://github.com/sofa-buffers/corelib-c-cpp" target="_blank" rel="noopener"><span class="badge" style="background:#5a6fb5">C</span><span>C / C++<small>Heap-free C99 / C++20 for embedded MCUs</small></span></a>
+                    <a class="lang" href="https://github.com/sofa-buffers/corelib-cpp" target="_blank" rel="noopener"><span class="badge" style="background:#00599c">C++</span><span>C++<small>Pure C++20, no C backend, speed-tuned</small></span></a>
+                    <a class="lang" href="https://github.com/sofa-buffers/corelib-rs" target="_blank" rel="noopener"><span class="badge" style="background:#c66a3a">Rs</span><span>Rust<small>High-speed std build for big machines</small></span></a>
+                    <a class="lang" href="https://github.com/sofa-buffers/corelib-rs-no-std" target="_blank" rel="noopener"><span class="badge" style="background:#8c5733">Rs</span><span>Rust<small>#![no_std], heap-free, for microcontrollers</small></span></a>
+                    <a class="lang" href="https://github.com/sofa-buffers/corelib-go" target="_blank" rel="noopener"><span class="badge" style="background:#2aa3c4">Go</span><span>Go<small>Streaming, dependency-free runtime core</small></span></a>
+                    <a class="lang" href="https://github.com/sofa-buffers/corelib-py" target="_blank" rel="noopener"><span class="badge" style="background:#3f7aab">Py</span><span>Python<small>Pure Python 3.9+, zero dependencies</small></span></a>
+                    <a class="lang" href="https://github.com/sofa-buffers/corelib-ts" target="_blank" rel="noopener"><span class="badge" style="background:#2f74c0">Ts</span><span>TypeScript<small>Runs on Node, browsers, Deno &amp; Bun</small></span></a>
+                    <a class="lang" href="https://github.com/sofa-buffers/corelib-java" target="_blank" rel="noopener"><span class="badge" style="background:#b07219">Jv</span><span>Java<small>Allocation-light, runs anywhere a JVM does</small></span></a>
+                    <a class="lang" href="https://github.com/sofa-buffers/corelib-cs" target="_blank" rel="noopener"><span class="badge" style="background:#6a4d9c">C#</span><span>C#<small>Allocation-light .NET, cloud-ready</small></span></a>
+                </div>
             </div>
         </section>
 
@@ -416,8 +428,8 @@
         <section id="features" class="wrap">
             <div class="sec-head reveal">
                 <span class="eyebrow">What makes it cool</span>
-                <h2 class="sec-title">Designed for the wire, not the warehouse</h2>
-                <p>Every byte and every design decision is optimized for moving structured data across slow links and tiny devices.</p>
+                <h2 class="sec-title">Small on the wire, simple in your code</h2>
+                <p>Every byte and every design decision is tuned for moving structured data fast — across slow links and onto the tiniest devices — without complicating the code you write.</p>
             </div>
             <div class="grid">
                 <article class="card reveal">
@@ -647,6 +659,38 @@ person2 = <span class="t">Person</span>.<span class="k">deserialize</span>(data)
                 });
             }, { threshold: 0.12 });
             els.forEach(function (e) { io.observe(e); });
+        })();
+
+        // ---- SOFA backronym tagline ----
+        (function () {
+            var el = document.getElementById('sofaTagline');
+            if (!el) return;
+            var phrases = [
+                [['S', 'tructured'], ['O', 'bjects'], ['F', 'or'], ['A', 'nyone']],
+                [['S', 'ome'], ['O', 'ther'], ['F', 'ormat'], ['A', 'gain?']],
+                [['S', 'treams'], ['O', 'bjects'], ['F', 'rom'], ['A', 'nywhere']],
+                [['S', 'eriously'], ['O', 'ptimized'], ['F', 'ormat'], ['A', 'rchitecture']]
+            ];
+            function render(p) {
+                return '<span class="sofa-x">' + p.map(function (w) {
+                    return '<b>' + w[0] + '</b>' + w[1];
+                }).join(' ') + '</span>';
+            }
+            var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (reduce) {
+                el.classList.add('sofa-stack');
+                el.innerHTML = phrases.map(render).join('');
+                return;
+            }
+            var i = 0;
+            setInterval(function () {
+                i = (i + 1) % phrases.length;
+                el.classList.add('fade');
+                setTimeout(function () {
+                    el.innerHTML = render(phrases[i]);
+                    el.classList.remove('fade');
+                }, 350);
+            }, 3400);
         })();
 
         // ---- Year ----
