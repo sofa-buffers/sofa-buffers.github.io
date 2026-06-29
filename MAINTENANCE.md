@@ -49,7 +49,7 @@ These appear in **five** places in `index.html`:
 
 1. **Hero stat** — `<span><b>9</b> core libraries</span>` (the **library** count, = number of `corelib-*` repos).
 2. **Section heading** — `<h2 class="sec-title">One format, eight languages</h2>` (the spelled-out **distinct-language** count).
-3. **`.lang-grid`** — one `<a class="lang">` card per `corelib-*` repo + the generator card last. The card's `<small>` holds the **distinguishing blurb** from that repo's README intro (target / std vs no_std / speed vs size / runtimes) — this is how two builds of the same language are told apart. The repo slug lives only in the `href` now, not in the visible text.
+3. **`.lang-grid`** — one `<a class="lang">` card per `corelib-*` repo, **corelibs only** (the `generator` is **not** a corelib and is intentionally **not** in this grid — see §F). The card's `<small>` holds the **distinguishing blurb** from that repo's README intro (target / std vs no_std / speed vs size / runtimes) — this is how two builds of the same language are told apart. The repo slug lives only in the `href` now, not in the visible text.
 4. **Footer columns** — `Core libraries` and `More languages` link lists (one `<a>` per corelib; label same-language variants distinctly, e.g. `Rust` vs `Rust (no_std)`).
 5. **JSON-LD** — `"programmingLanguage": [ ... ]` in the `<script type="application/ld+json">` block. This is the list of **distinct languages**, so a second build of an existing language (e.g. a new Rust variant) does **not** add an entry.
 
@@ -77,6 +77,14 @@ The 6 feature cards under **"What makes it cool"** summarize the docs (streaming
 - `sitemap.xml` — bump the implied freshness if you do a big content change (optional; there's intentionally no hard-coded `lastmod`).
 - `robots.txt` and `.nojekyll` — usually no change.
 - If the project's one-line pitch changes, update `<title>`, `<meta name="description">`, and the Open Graph / Twitter description **together**.
+
+### F. The `generator` repo
+The schema→code generator is a **first-class ecosystem component**, not a corelib, so it is **not** a `.lang-grid` card. It is surfaced as a prominent call-to-action instead. Keep the link (`https://github.com/sofa-buffers/generator`) live in **all** of these spots:
+- **Nav** — the `Generator` link in `.nav-links`.
+- **Hero CTA** — the highlighted `<a class="btn btn-accent">Get the Code Generator</a>` button (indigo `--accent-2`, distinct from the teal primary so it stands out). This is the deliberately "good visible" entry point.
+- **Footer** — the `Code Generator` link in the `Project` column.
+
+If the generator is renamed/moved, fix all three. Don't fold it back into the language grid.
 
 ---
 
