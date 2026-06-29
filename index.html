@@ -375,7 +375,7 @@
                 <a class="btn btn-ghost" href="https://github.com/sofa-buffers/documentation" target="_blank" rel="noopener">Read the Documentation →</a>
             </div>
             <div class="hero-meta">
-                <span><b>8</b> language core libraries</span>
+                <span><b>9</b> core libraries</span>
                 <span><b>1</b> schema → all languages</span>
                 <span><b>0</b> heavyweight dependencies</span>
             </div>
@@ -520,18 +520,18 @@ person2 = <span class="t">Person</span>.<span class="k">deserialize</span>(data)
             <div class="sec-head reveal">
                 <span class="eyebrow">Core libraries</span>
                 <h2 class="sec-title">One format, eight languages</h2>
-                <p>Each core library implements the same streamable wire format and shares a common suite of conformance test vectors.</p>
+                <p>Each core library implements the same streamable wire format and shares a common suite of conformance test vectors — and some languages ship more than one build, each tuned for a different target.</p>
             </div>
             <div class="lang-grid reveal">
-                <a class="lang" href="https://github.com/sofa-buffers/corelib-c-cpp" target="_blank" rel="noopener"><span class="badge" style="background:#5a6fb5">C</span><span>C / C++<small>corelib-c-cpp</small></span></a>
-                <a class="lang" href="https://github.com/sofa-buffers/corelib-cpp" target="_blank" rel="noopener"><span class="badge" style="background:#00599c">C++</span><span>C++<small>corelib-cpp</small></span></a>
-                <a class="lang" href="https://github.com/sofa-buffers/corelib-rs" target="_blank" rel="noopener"><span class="badge" style="background:#c66a3a">Rs</span><span>Rust<small>corelib-rs</small></span></a>
-                <a class="lang" href="https://github.com/sofa-buffers/corelib-go" target="_blank" rel="noopener"><span class="badge" style="background:#2aa3c4">Go</span><span>Go<small>corelib-go</small></span></a>
-                <a class="lang" href="https://github.com/sofa-buffers/corelib-py" target="_blank" rel="noopener"><span class="badge" style="background:#3f7aab">Py</span><span>Python<small>corelib-py</small></span></a>
-                <a class="lang" href="https://github.com/sofa-buffers/corelib-ts" target="_blank" rel="noopener"><span class="badge" style="background:#2f74c0">Ts</span><span>TypeScript<small>corelib-ts</small></span></a>
-                <a class="lang" href="https://github.com/sofa-buffers/corelib-java" target="_blank" rel="noopener"><span class="badge" style="background:#b07219">Jv</span><span>Java<small>corelib-java</small></span></a>
-                <a class="lang" href="https://github.com/sofa-buffers/corelib-cs" target="_blank" rel="noopener"><span class="badge" style="background:#6a4d9c">C#</span><span>C#<small>corelib-cs</small></span></a>
-                <a class="lang" href="https://github.com/sofa-buffers/generator" target="_blank" rel="noopener"><span class="badge" style="background:var(--accent)">⚙︎</span><span>Generator<small>schema → code</small></span></a>
+                <a class="lang" href="https://github.com/sofa-buffers/corelib-c-cpp" target="_blank" rel="noopener"><span class="badge" style="background:#5a6fb5">C</span><span>C / C++<small>Heap-free C99 / C++20 for embedded MCUs</small></span></a>
+                <a class="lang" href="https://github.com/sofa-buffers/corelib-cpp" target="_blank" rel="noopener"><span class="badge" style="background:#00599c">C++</span><span>C++<small>Pure C++20, no C backend, speed-tuned</small></span></a>
+                <a class="lang" href="https://github.com/sofa-buffers/corelib-rs" target="_blank" rel="noopener"><span class="badge" style="background:#c66a3a">Rs</span><span>Rust<small>High-speed std build for big machines</small></span></a>
+                <a class="lang" href="https://github.com/sofa-buffers/corelib-rs-no-std" target="_blank" rel="noopener"><span class="badge" style="background:#8c5733">Rs</span><span>Rust<small>#![no_std], heap-free, for microcontrollers</small></span></a>
+                <a class="lang" href="https://github.com/sofa-buffers/corelib-go" target="_blank" rel="noopener"><span class="badge" style="background:#2aa3c4">Go</span><span>Go<small>Streaming, dependency-free runtime core</small></span></a>
+                <a class="lang" href="https://github.com/sofa-buffers/corelib-py" target="_blank" rel="noopener"><span class="badge" style="background:#3f7aab">Py</span><span>Python<small>Pure Python 3.9+, zero dependencies</small></span></a>
+                <a class="lang" href="https://github.com/sofa-buffers/corelib-ts" target="_blank" rel="noopener"><span class="badge" style="background:#2f74c0">Ts</span><span>TypeScript<small>Runs on Node, browsers, Deno &amp; Bun</small></span></a>
+                <a class="lang" href="https://github.com/sofa-buffers/corelib-java" target="_blank" rel="noopener"><span class="badge" style="background:#b07219">Jv</span><span>Java<small>Allocation-light, runs anywhere a JVM does</small></span></a>
+                <a class="lang" href="https://github.com/sofa-buffers/corelib-cs" target="_blank" rel="noopener"><span class="badge" style="background:#6a4d9c">C#</span><span>C#<small>Allocation-light .NET, cloud-ready</small></span></a>
             </div>
         </section>
 
@@ -568,6 +568,7 @@ person2 = <span class="t">Person</span>.<span class="k">deserialize</span>(data)
                     <a href="https://github.com/sofa-buffers/corelib-c-cpp" target="_blank" rel="noopener">C / C++</a>
                     <a href="https://github.com/sofa-buffers/corelib-cpp" target="_blank" rel="noopener">C++</a>
                     <a href="https://github.com/sofa-buffers/corelib-rs" target="_blank" rel="noopener">Rust</a>
+                    <a href="https://github.com/sofa-buffers/corelib-rs-no-std" target="_blank" rel="noopener">Rust (no_std)</a>
                     <a href="https://github.com/sofa-buffers/corelib-go" target="_blank" rel="noopener">Go</a>
                     <a href="https://github.com/sofa-buffers/corelib-py" target="_blank" rel="noopener">Python</a>
                 </div>
