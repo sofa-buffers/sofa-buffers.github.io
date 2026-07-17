@@ -16,6 +16,8 @@ The page describes the SofaBuffers project. The authoritative facts come from th
 | Per-corelib README | `https://raw.githubusercontent.com/sofa-buffers/<corelib-repo>/main/README.md` | The **distinguishing blurb** for each card (the `<small>` line). Read the intro paragraph after the `## SofaBuffers <Lang> library` heading — it says what makes this build different (target, std vs no_std, speed vs size, runtimes). |
 | Documentation README | https://raw.githubusercontent.com/sofa-buffers/documentation/main/README.md | Feature list, why-it-exists, format comparison |
 | Architecture / spec | https://raw.githubusercontent.com/sofa-buffers/documentation/main/ARCHITECTURE.md | Wire types, varint/zig-zag, sequences, API constants, generated-object API |
+| Crucible README | https://raw.githubusercontent.com/sofa-buffers/crucible/main/README.md | The **quality** story: differential fuzzing / cross-language conformance (drives the "Quality & performance" section). |
+| Arena README | https://raw.githubusercontent.com/sofa-buffers/arena/main/README.md | The **performance** story: benchmark suite vs Protocol Buffers, throughput + embedded footprint (drives the "Quality & performance" section). |
 
 Use `WebFetch` / `curl` (or `gh api` when authenticated) to read them. The org member list is private; repo metadata is public.
 
@@ -58,7 +60,7 @@ These appear in **five** places in `index.html`:
 > ⚠️ Keep the two counts straight: a new `corelib-*` repo **always** bumps the hero library count and adds a grid card + footer link, but it only bumps the heading number / adds a JSON-LD entry **if it introduces a brand-new language**. A second build of an existing language (the common case for embedded vs cloud) does not.
 
 ### B. Repository links
-Every `https://github.com/sofa-buffers/<repo>` link must point to a real repo. They appear in the nav, hero CTAs, `.lang-grid`, the CTA band, and the footer. If a repo is renamed/added/removed, fix every link and the `README.md` link list.
+Every `https://github.com/sofa-buffers/<repo>` link must point to a real repo. They appear in the nav, hero CTAs, `.lang-grid`, the **"Quality & performance"** section (`#proven` — links to `crucible` and `arena`), the CTA band, and the footer. If a repo is renamed/added/removed, fix every link and the `README.md` link list.
 
 ### C. Format / spec facts
 From `ARCHITECTURE.md`. These live in the **"Under the hood"** section:
@@ -85,6 +87,13 @@ The schema→code generator is a **first-class ecosystem component**, not a core
 - **Footer** — the `Code Generator` link in the `Project` column.
 
 If the generator is renamed/moved, fix all three. Don't fold it back into the language grid.
+
+### G. Quality & performance section (`#proven`)
+The **"Quality & performance"** section has two cards backed by two ecosystem repos:
+- **Crucible** (`https://github.com/sofa-buffers/crucible`) — the *correctness* story (differential fuzzing across every implementation).
+- **Arena** (`https://github.com/sofa-buffers/arena`) — the *performance* story (benchmarks vs Protocol Buffers, server throughput + embedded footprint).
+
+Like the generator, these are ecosystem components, **not** corelibs — keep them out of the `.lang-grid` and out of both counts in §3A. Keep the copy qualitative: **no hard numbers** (throughput figures, byte sizes, finding counts) — the READMEs carry the specifics; the page just says we prove correctness and track performance. Re-read both READMEs before editing these cards.
 
 ---
 
