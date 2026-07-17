@@ -216,6 +216,10 @@
 
         /* ---------- Sections ---------- */
         section { padding: 4rem 0; }
+        /* Plain (unbanded) sections carry .wrap on the <section> itself, whose
+           horizontal padding would otherwise cancel the vertical section
+           padding via specificity — restore it (hero/CTA set their own). */
+        section.wrap:not(.hero):not(.cta-band) { padding-top: 4rem; padding-bottom: 4rem; }
         .sec-head { text-align: center; max-width: 720px; margin: 0 auto 3rem; }
         .eyebrow {
             text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.78rem;
