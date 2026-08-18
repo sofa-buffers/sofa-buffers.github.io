@@ -15,7 +15,8 @@ The page describes the SofaBuffers project. The authoritative facts come from th
 | Org repo list | `https://api.github.com/orgs/sofa-buffers/repos?per_page=100` | **The canonical core-library list.** Every repo whose name starts with `corelib-` is one card in the language grid — nothing else is. Also gives each repo's one-line `description`. |
 | Per-corelib README | `https://raw.githubusercontent.com/sofa-buffers/<corelib-repo>/main/README.md` | The **distinguishing blurb** for each card (the `<small>` line). Read the intro paragraph after the `## SofaBuffers <Lang> library` heading — it says what makes this build different (target, std vs no_std, speed vs size, runtimes). |
 | Documentation README | https://raw.githubusercontent.com/sofa-buffers/documentation/main/README.md | Feature list, why-it-exists, format comparison |
-| Architecture / spec | https://raw.githubusercontent.com/sofa-buffers/documentation/main/ARCHITECTURE.md | Wire types, varint/zig-zag, sequences, API constants, generated-object API |
+| Corelib plan / wire spec | https://raw.githubusercontent.com/sofa-buffers/documentation/main/CORELIB_PLAN.md | Wire types, varint/zig-zag, sequences, API constants, generated-object API |
+| Message spec | https://raw.githubusercontent.com/sofa-buffers/documentation/main/MESSAGE_SPEC.md | How schema types (structs, unions, enums, arrays, maps) map onto the wire primitives, and when a field is written at all |
 | Crucible README | https://raw.githubusercontent.com/sofa-buffers/crucible/main/README.md | The **quality** story: differential fuzzing / cross-language conformance (drives the "Quality & performance" section). |
 | Arena README | https://raw.githubusercontent.com/sofa-buffers/arena/main/README.md | The **performance** story: benchmark suite vs Protocol Buffers, throughput + embedded footprint (drives the "Quality & performance" section). |
 
@@ -42,28 +43,28 @@ Use `WebFetch` / `curl` (or `gh api` when authenticated) to read them. The org m
 When one of these changes, grep for **all** occurrences. The list of languages is the thing most likely to change.
 
 ### A. Supported languages / core libraries
-The project currently ships **9 `corelib-*` repos** (spanning **8 distinct languages** — Rust and C++ each have two builds) **+ a generator**. Two counts matter and they are **not** the same number:
+The project currently ships **12 `corelib-*` repos** (spanning **11 distinct languages** — Rust and C++ each have two builds) **+ a generator**. Two counts matter and they are **not** the same number:
 
-- **library count = number of `corelib-*` repos** (currently 9) — used by the hero stat.
-- **distinct-language count** (currently 8: C, C++, Rust, Go, Python, TypeScript, Java, C#) — used by the section heading and the JSON-LD array.
+- **library count = number of `corelib-*` repos** (currently 12) — equals the number of `.lang-grid` cards.
+- **distinct-language count** (currently 11: C, C++, Rust, Go, Python, TypeScript, Java, Kotlin, C#, Zig, Dart) — used by the hero stat, the section heading and the JSON-LD array. Note `corelib-c-cpp` covers **two** languages (C and C++), and `corelib-cpp` / `corelib-rs-no-std` are second builds of languages already counted.
 
 These appear in **five** places in `index.html`:
 
-1. **Hero stat** — `<span><b>9</b> core libraries</span>` (the **library** count, = number of `corelib-*` repos).
-2. **Section heading** — `<h2 class="sec-title">One format, eight languages</h2>` (the spelled-out **distinct-language** count).
+1. **Hero stat** — `<span><b>11</b> supported languages</span>` (the **distinct-language** count).
+2. **Section heading** — `<h2 class="sec-title">One format, eleven languages</h2>` (the same count, spelled out).
 3. **`.lang-grid`** — one `<a class="lang">` card per `corelib-*` repo, **corelibs only** (the `generator` is **not** a corelib and is intentionally **not** in this grid — see §F). The card's `<small>` holds the **distinguishing blurb** from that repo's README intro (target / std vs no_std / speed vs size / runtimes) — this is how two builds of the same language are told apart. The repo slug lives only in the `href` now, not in the visible text.
 4. **Footer columns** — `Core libraries` and `More languages` link lists (one `<a>` per corelib; label same-language variants distinctly, e.g. `Rust` vs `Rust (no_std)`).
 5. **JSON-LD** — `"programmingLanguage": [ ... ]` in the `<script type="application/ld+json">` block. This is the list of **distinct languages**, so a second build of an existing language (e.g. a new Rust variant) does **not** add an entry.
 
 …plus the **meta keywords** (`<meta name="keywords">`) and **meta description** mention languages generically — only touch if the framing changes.
 
-> ⚠️ Keep the two counts straight: a new `corelib-*` repo **always** bumps the hero library count and adds a grid card + footer link, but it only bumps the heading number / adds a JSON-LD entry **if it introduces a brand-new language**. A second build of an existing language (the common case for embedded vs cloud) does not.
+> ⚠️ Keep the two counts straight: a new `corelib-*` repo **always** adds a grid card + footer link, but it only bumps the hero stat / heading number and adds a JSON-LD entry **if it introduces a brand-new language**. A second build of an existing language (the common case for embedded vs cloud) does not.
 
 ### B. Repository links
 Every `https://github.com/sofa-buffers/<repo>` link must point to a real repo. They appear in the nav, hero CTAs, `.lang-grid`, the **"Quality & performance"** section (`#proven` — links to `crucible` and `arena`), the CTA band, and the footer. If a repo is renamed/added/removed, fix every link and the `README.md` link list.
 
 ### C. Format / spec facts
-From `ARCHITECTURE.md`. These live in the **"Under the hood"** section:
+From `CORELIB_PLAN.md` (and `MESSAGE_SPEC.md` for the schema-type mapping). These live in the **"Under the hood"** section:
 - The **8 wire types** table (`wire-format.txt` code block: `0x0`–`0x7`)
 - **Varint** example (`300 -> 0xAC 0x02`) and **zig-zag** examples (`-1 -> 1`, `-2 -> 3`)
 - **Field header** formula `(id << 3) | type`
@@ -133,7 +134,7 @@ grep -oE "https://github.com/sofa-buffers/[a-z0-9-]+" index.html | sort -u
 python3 -m http.server 8000   # then open http://localhost:8000
 ```
 
-Confirm both counts from §3A are consistent: the **library** count (hero stat = number of `corelib-*` repos = grid cards minus the generator) and the **distinct-language** count (heading word = JSON-LD array length). Remember they differ whenever a language has more than one build.
+Confirm both counts from §3A are consistent: the **library** count (number of `corelib-*` repos = number of grid cards) and the **distinct-language** count (hero stat digit = heading word = JSON-LD array length). Remember they differ whenever a language has more than one build.
 
 ---
 
@@ -151,19 +152,19 @@ GitHub Pages publishes from the **`main` branch, root path**. So:
 
 First read the new repo's README intro to write its `<small>` blurb, then branch on whether it's a new **language** or another **build of an existing one**.
 
-**Case 1 — brand-new language** (say `corelib-kt`, Kotlin):
+**Case 1 — brand-new language** (say `corelib-swift`, Swift):
 
-1. **Hero stat:** library count `9` → `10`.
-2. **Heading:** "eight languages" → "nine languages" (spelled out).
+1. **Hero stat:** language count `11` → `12`.
+2. **Heading:** "eleven languages" → "twelve languages" (spelled out).
 3. **`.lang-grid`:** add a card (copy an existing `<a class="lang">`, pick a distinct `.badge` background color, set the repo URL + display name, and put the README-derived blurb in `<small>`).
 4. **Footer:** add the link under `Core libraries` or `More languages`.
-5. **JSON-LD:** add `"Kotlin"` to the `programmingLanguage` array.
+5. **JSON-LD:** add `"Swift"` to the `programmingLanguage` array.
 6. **(Optional) meta keywords:** add the language if it helps SEO.
 7. Validate (§5) → branch + PR (§6) → ask before merging.
 
 **Case 2 — another build of an existing language** (say `corelib-rs-gpu`, a second Rust target):
 
-1. **Hero stat:** library count `9` → `10`.
+1. **Hero stat:** **no change** (no new language).
 2. **Heading:** **no change** (no new language).
 3. **`.lang-grid`:** add a card next to the sibling build; the badge/name repeat the language, and the `<small>` blurb is what distinguishes them (e.g. "GPU-offload Rust build" vs "High-speed std build").
 4. **Footer:** add a distinctly-labelled link (e.g. `Rust (GPU)`).

@@ -6,8 +6,8 @@
 
     <!-- Primary SEO meta -->
     <title>SofaBuffers — Structured Objects For Anyone | Streamable Binary Serialization</title>
-    <meta name="description" content="SofaBuffers is a compact, streaming-first binary serialization format for structured data. Tightly packed varint/zig-zag encoding, nested sequences and code generation for C/C++, Rust, Go, Python, TypeScript, Java, C#, Zig and Dart. Built for embedded developers and cloud engineers.">
-    <meta name="keywords" content="SofaBuffers, binary serialization, serialization format, varint, zigzag encoding, streaming serialization, embedded, IoT, protobuf alternative, flatbuffers alternative, messagepack, TLV, code generation, structured data, Zig, Dart">
+    <meta name="description" content="SofaBuffers is a compact, streaming-first binary serialization format for structured data. Tightly packed varint/zig-zag encoding, nested sequences and code generation for C/C++, Rust, Go, Python, TypeScript, Java, C#, Kotlin, Zig and Dart. Built for embedded developers and cloud engineers.">
+    <meta name="keywords" content="SofaBuffers, binary serialization, serialization format, varint, zigzag encoding, streaming serialization, embedded, IoT, protobuf alternative, flatbuffers alternative, messagepack, TLV, code generation, structured data, Kotlin, Zig, Dart">
     <meta name="author" content="SofaBuffers">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#0e1620">
@@ -38,11 +38,11 @@
       "alternateName": "Structured Objects For Anyone",
       "applicationCategory": "DeveloperApplication",
       "operatingSystem": "Cross-platform",
-      "description": "SofaBuffers is a compact, streaming-first binary serialization format for structured data, with code generation for C/C++, Rust, Go, Python, TypeScript, Java, C#, Zig and Dart.",
+      "description": "SofaBuffers is a compact, streaming-first binary serialization format for structured data, with code generation for C/C++, Rust, Go, Python, TypeScript, Java, C#, Kotlin, Zig and Dart.",
       "license": "https://opensource.org/licenses/MIT",
       "url": "https://sofa-buffers.github.io/",
       "codeRepository": "https://github.com/sofa-buffers",
-      "programmingLanguage": ["C", "C++", "Rust", "Go", "Python", "TypeScript", "Java", "C#", "Zig", "Dart"],
+      "programmingLanguage": ["C", "C++", "Rust", "Go", "Python", "TypeScript", "Java", "C#", "Kotlin", "Zig", "Dart"],
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
     }
     </script>
@@ -400,7 +400,7 @@
                 <a class="btn btn-ghost" href="https://github.com/sofa-buffers/documentation" target="_blank" rel="noopener">Read the Documentation →</a>
             </div>
             <div class="hero-meta">
-                <span><b>10</b> supported languages</span>
+                <span><b>11</b> supported languages</span>
                 <span><b>1</b> schema → all languages</span>
                 <span><b>0</b> heavyweight dependencies</span>
             </div>
@@ -411,7 +411,7 @@
             <div class="wrap">
                 <div class="sec-head reveal">
                     <span class="eyebrow">Core libraries</span>
-                    <h2 class="sec-title">One format, ten languages</h2>
+                    <h2 class="sec-title">One format, eleven languages</h2>
                     <p>Each core library implements the same streamable wire format and shares a common suite of conformance test vectors — and some languages ship more than one build, each tuned for a different target.</p>
                 </div>
                 <div class="lang-grid reveal">
@@ -423,6 +423,7 @@
                     <a class="lang" href="https://github.com/sofa-buffers/corelib-py" target="_blank" rel="noopener"><span class="badge" style="background:#3f7aab">Py</span><span>Python<small>Pure Python 3.9+, zero dependencies</small></span></a>
                     <a class="lang" href="https://github.com/sofa-buffers/corelib-ts" target="_blank" rel="noopener"><span class="badge" style="background:#2f74c0">Ts</span><span>TypeScript<small>Runs on Node, browsers, Deno &amp; Bun</small></span></a>
                     <a class="lang" href="https://github.com/sofa-buffers/corelib-java" target="_blank" rel="noopener"><span class="badge" style="background:#b07219">Jv</span><span>Java<small>Allocation-light, runs anywhere a JVM does</small></span></a>
+                    <a class="lang" href="https://github.com/sofa-buffers/corelib-kotlin-mp" target="_blank" rel="noopener"><span class="badge" style="background:#7f52ff">Kt</span><span>Kotlin<small>One multiplatform codec: JVM, JS &amp; native</small></span></a>
                     <a class="lang" href="https://github.com/sofa-buffers/corelib-cs" target="_blank" rel="noopener"><span class="badge" style="background:#6a4d9c">C#</span><span>C#<small>Allocation-light .NET, cloud-ready</small></span></a>
                     <a class="lang" href="https://github.com/sofa-buffers/corelib-dart" target="_blank" rel="noopener"><span class="badge" style="background:#0a7ea4">Dt</span><span>Dart<small>Pure Dart, streaming, zero dependencies</small></span></a>
                     <a class="lang" href="https://github.com/sofa-buffers/corelib-zig" target="_blank" rel="noopener"><span class="badge" style="background:#f7a41d">Zig</span><span>Zig<small>Allocation-free, zero-copy, max throughput</small></span></a>
@@ -614,7 +615,8 @@ person2 = <span class="t">Person</span>.<span class="k">deserialize</span>(data)
                     <h4>Project</h4>
                     <a href="https://github.com/sofa-buffers" target="_blank" rel="noopener">GitHub Organization</a>
                     <a href="https://github.com/sofa-buffers/documentation" target="_blank" rel="noopener">Documentation</a>
-                    <a href="https://github.com/sofa-buffers/documentation/blob/main/ARCHITECTURE.md" target="_blank" rel="noopener">Architecture / Spec</a>
+                    <a href="https://github.com/sofa-buffers/documentation/blob/main/CORELIB_PLAN.md" target="_blank" rel="noopener">Wire Format Spec</a>
+                    <a href="https://github.com/sofa-buffers/documentation/blob/main/MESSAGE_SPEC.md" target="_blank" rel="noopener">Message Spec</a>
                     <a href="https://github.com/sofa-buffers/generator" target="_blank" rel="noopener">Code Generator</a>
                 </div>
                 <div class="foot-col">
@@ -630,6 +632,7 @@ person2 = <span class="t">Person</span>.<span class="k">deserialize</span>(data)
                     <h4>More languages</h4>
                     <a href="https://github.com/sofa-buffers/corelib-ts" target="_blank" rel="noopener">TypeScript</a>
                     <a href="https://github.com/sofa-buffers/corelib-java" target="_blank" rel="noopener">Java</a>
+                    <a href="https://github.com/sofa-buffers/corelib-kotlin-mp" target="_blank" rel="noopener">Kotlin</a>
                     <a href="https://github.com/sofa-buffers/corelib-cs" target="_blank" rel="noopener">C#</a>
                     <a href="https://github.com/sofa-buffers/corelib-dart" target="_blank" rel="noopener">Dart</a>
                     <a href="https://github.com/sofa-buffers/corelib-zig" target="_blank" rel="noopener">Zig</a>
