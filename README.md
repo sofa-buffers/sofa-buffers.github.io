@@ -20,7 +20,7 @@ It is tightly packed (varint + zig-zag encoding), fully **streamable** on both s
 - 🏠 **Organization:** https://github.com/sofa-buffers
 - 📖 **Documentation & spec:** https://github.com/sofa-buffers/documentation
 - ⚙️ **Code generator:** https://github.com/sofa-buffers/generator
-- **Core libraries:** [C/C++](https://github.com/sofa-buffers/corelib-c-cpp) · [C++](https://github.com/sofa-buffers/corelib-cpp) · [Rust](https://github.com/sofa-buffers/corelib-rs) · [Go](https://github.com/sofa-buffers/corelib-go) · [Python](https://github.com/sofa-buffers/corelib-py) · [TypeScript](https://github.com/sofa-buffers/corelib-ts) · [Java](https://github.com/sofa-buffers/corelib-java) · [C#](https://github.com/sofa-buffers/corelib-cs) · [Zig](https://github.com/sofa-buffers/corelib-zig) · [Dart](https://github.com/sofa-buffers/corelib-dart)
+- **Core libraries:** [C/C++](https://github.com/sofa-buffers/corelib-c-cpp) · [C++](https://github.com/sofa-buffers/corelib-cpp) · [Rust](https://github.com/sofa-buffers/corelib-rs) · [Rust (no_std)](https://github.com/sofa-buffers/corelib-rs-no-std) · [Go](https://github.com/sofa-buffers/corelib-go) · [Python](https://github.com/sofa-buffers/corelib-py) · [TypeScript](https://github.com/sofa-buffers/corelib-ts) · [Java](https://github.com/sofa-buffers/corelib-java) · [Kotlin](https://github.com/sofa-buffers/corelib-kotlin-mp) · [C#](https://github.com/sofa-buffers/corelib-cs) · [Zig](https://github.com/sofa-buffers/corelib-zig) · [Dart](https://github.com/sofa-buffers/corelib-dart)
 
 ## Developing the page
 
