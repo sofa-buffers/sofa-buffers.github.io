@@ -99,13 +99,17 @@ Like the generator, these are ecosystem components, **not** corelibs — keep th
 
 ### H. The install box (`#install`)
 
-The **"Get started"** section holds one tabbed box: a tab per install target (**the generator + every `corelib-*` repo**, so `12 + 1 = 13` tabs today) and a global **Linux / macOS / Windows** switch. It is plain static markup — every tab and every OS variant is in the HTML; JS only toggles classes, and the OS choice is remembered in `localStorage` under `sb-os`.
+The **"Get started"** section holds one tabbed box: a tab per install target — **the generator + every `corelib-*` repo**, so `12 + 1 = 13` tabs today — in the same order as the `.lang-grid`. Plain static markup: every tab is in the HTML, the JS only toggles classes.
+
+The box shows **how to install SofaBuffers, not how to set up a language**. Compiler/SDK installation was deliberately dropped — anyone reaching for a core library already has their toolchain running. The minimum version still gets stated, as a `.ireq` line in the panel head, and that is all.
 
 Structure of one tab (`.ipanel`):
 
-- `.ipanel-head` — repo name, one-line blurb, "Full README on GitHub" link.
-- `.istep` blocks. A step carrying `data-os="linux|mac|windows"` is shown **only** for that OS (three sibling copies, one per OS); a step **without** `data-os` is shown for every OS. Step numbers are written out literally in `.inum` — renumber by hand when adding or removing a step.
+- `.ipanel-head` — repo name, one-line blurb, a `<p class="ireq">` **Requires** line (from the repo's `### Requirements`), and the "Full README on GitHub" link.
+- `.istep` blocks, one per thing the user has to do. `.inum` step numbers are rendered **only when a panel has more than one step**, and are written out literally — renumber by hand when adding or removing one.
 - Each command sits in the page's standard `.code-card` + `<pre class="code">`. The copy button needs **no** `data-copy` when it is inside a `.code-card` (it grabs the sibling `<pre>`); the two older code cards in "Under the hood" still use `data-copy="#id"` and both paths work.
+
+**Per-OS instructions:** only the **generator** tab has them — installing the CLI genuinely differs (`install.sh` on Linux/macOS, a PowerShell download on Windows, since there is no `install.ps1`). Those steps carry `data-os="linux|mac|windows"` and the box-level `data-os` attribute picks one; the choice is remembered in `localStorage` under `sb-os` and guessed from the user agent on a first visit. Every corelib installs with the **same command everywhere**, so those panels are marked `data-noos="1"`: the OS switcher hides itself and the head shows a `.isame` "Same command on Linux, macOS and Windows" line instead. If a corelib ever *does* need per-OS steps, drop `data-noos` and add the three `data-os` siblings.
 
 **A new tab means:** copy the nearest existing `.ipanel`, give it `id="ip-<slug>"`, add the matching `<button class="itab" … data-tab="<slug>">` (reuse the `.badge` colour from that language's `.lang-grid` card), and keep the tab order in step with the grid order.
 
@@ -115,11 +119,9 @@ Structure of one tab (`.ipanel`):
 |---|---|
 | Install command / package id (`cargo add sofa-buffers-corelib`, `npm install @sofa-buffers/corelib`, `pip install sofa-buffers-corelib`, `go get …`, `dotnet add package SofaBuffers.Corelib`, `dart pub add sofabuffers`, `zig fetch --save …`) | that corelib's `### Packaging` / `### Package name` section |
 | **Pinned versions** — Java `0.10.0`, Kotlin `0.1.0`, Zig `#v0.10.0` | same; these are the ones most likely to go stale |
-| Minimum toolchain version quoted in the note (Rust 1.70+, Go 1.21+, Python 3.9+, Node 20+, JDK 17+, .NET 9+, Dart 3.8+, Zig 0.16+, C++20) | that corelib's `### Requirements` section |
+| The `.ireq` **Requires** line (Rust 1.70+, Go 1.21+, Python 3.9+, Node 20+, JDK 17+, .NET 9+, Dart 3.8+, Zig 0.16+, C++20 …) | that corelib's `### Requirements` section |
 | Generator install channels + the `--lang` value list | the generator README's `## Installation` and `## Quick start` |
 | Generator Windows one-liner | the release asset naming (`sofabgen-windows-amd64.exe`); it downloads via `releases/latest/download/…` on purpose, so it never needs a version bump |
-
-The per-OS **toolchain** commands (`apt`, `brew`, `winget`, `choco`, `snap`) are ecosystem knowledge, not repo facts — leave them alone unless one actually breaks, and keep the official-download link in the note next to any that is distro-specific.
 
 ---
 
@@ -159,7 +161,7 @@ grep -oE "https://github.com/sofa-buffers/[a-z0-9-]+" index.html | sort -u
 python3 -m http.server 8000   # then open http://localhost:8000
 ```
 
-Confirm the install box (§3H) has one tab per `corelib-*` repo plus the generator, and that each tab still has a Linux, a macOS **and** a Windows variant of its OS-specific step.
+Confirm the install box (§3H) has one tab per `corelib-*` repo plus the generator, that every corelib panel still carries `data-noos="1"`, and that the generator panel still has all three `data-os` variants of its install step.
 
 Confirm both counts from §3A are consistent: the **library** count (number of `corelib-*` repos = number of grid cards) and the **distinct-language** count (hero stat digit = heading word = JSON-LD array length). Remember they differ whenever a language has more than one build.
 

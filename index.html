@@ -366,6 +366,18 @@
         .ipanel[hidden] { display: none; }
         .ipanel-head h3 { font-size: 1.18rem; }
         .ipanel-head p { color: var(--fg-muted); margin: 0.35rem 0 0.5rem; max-width: 72ch; }
+        .ireq, .isame {
+            display: inline-flex; align-items: center; gap: 0.45rem;
+            font-size: 0.86rem; color: var(--fg-dim); margin: 0.15rem 0 0.15rem;
+        }
+        .ireq { margin-right: 1rem; }
+        .ireq b { color: var(--fg-muted); font-weight: 700; }
+        .isame::before {
+            content: ''; width: 15px; height: 15px; flex: 0 0 15px;
+            background: no-repeat center/13px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233ec9c0' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+        }
+        .ipanel-head .ilink { display: block; margin-top: 0.5rem; }
+        .install-osbar[hidden] { display: none; }
         .ilink { font-size: 0.9rem; font-weight: 600; }
         .istep { margin-top: 1.7rem; }
         .istep-h { display: flex; align-items: center; gap: 0.65rem; font-weight: 700; }
@@ -509,7 +521,7 @@
             <div class="sec-head reveal">
                 <span class="eyebrow">Get started</span>
                 <h2 class="sec-title">Installed in one command</h2>
-                <p>Pick the generator or your core library, pick your operating system, hit copy. Every core library is dependency-free, so there is nothing to install beyond the toolchain you already have.</p>
+                <p>Pick the generator or your core library, hit copy. Every core library is dependency-free and installs with a single command through the package manager you already use — only the generator itself differs per operating system.</p>
             </div>
 
             <div class="install-box reveal" id="installBox" data-os="linux">
@@ -543,6 +555,7 @@
                         <div class="ipanel-head">
                             <h3>SofaBuffers Code Generator</h3>
                             <p><span class="mono">sofabgen</span> is a single static binary with no runtime dependencies. It turns a YAML/JSON object definition into typed code for every supported language.</p>
+                            <p class="ireq"><b>Requires</b> Nothing at all — the binary is self-contained</p>
                             <a class="ilink" href="https://github.com/sofa-buffers/generator" target="_blank" rel="noopener">Full README on GitHub &rarr;</a>
                         </div>
                         <div class="istep" data-os="linux">
@@ -627,52 +640,16 @@ sofabgen --lang rust --in messages/ --out src/generated/</pre>
                             </div>
                         </div>
                     </div>
-                    <div class="ipanel" id="ip-c-cpp" role="tabpanel" aria-labelledby="it-c-cpp" hidden>
+                    <div class="ipanel" id="ip-c-cpp" role="tabpanel" aria-labelledby="it-c-cpp" data-noos="1" hidden>
                         <div class="ipanel-head">
                             <h3>corelib-c-cpp</h3>
                             <p>Heap-free C99 object API plus a header-only C++20 wrapper over the same core — for bare-metal MCUs up to IoT-class devices.</p>
+                            <p class="ireq"><b>Requires</b> A C99 and/or C++20 compiler (GCC or Clang) · CMake 3.10+ only for tests, benchmarks and docs</p>
+                            <p class="isame">Same command on Linux, macOS and Windows</p>
                             <a class="ilink" href="https://github.com/sofa-buffers/corelib-c-cpp" target="_blank" rel="noopener">Full README on GitHub &rarr;</a>
                         </div>
-                        <div class="istep" data-os="linux">
-                            <p class="istep-h"><span class="inum">1</span>Get a compiler and CMake</p>
-                            <p class="istep-note">Needs a <strong>C99</strong> and/or <strong>C++20</strong> compiler (GCC or Clang). CMake 3.10+ is only required for the tests, benchmarks and docs — the corelib itself is a handful of <span class="mono">.c</span> files you can drop into any build.</p>
-                            <div class="code-card">
-                                <div class="code-head">
-                                    <div class="dots"><span></span><span></span><span></span></div>
-                                    <span class="fname">bash</span>
-                                    <button class="copy" type="button">Copy</button>
-                                </div>
-<pre class="code">sudo apt install -y build-essential cmake</pre>
-                            </div>
-                        </div>
-                        <div class="istep" data-os="mac">
-                            <p class="istep-h"><span class="inum">1</span>Get a compiler and CMake</p>
-                            <p class="istep-note">Needs a <strong>C99</strong> and/or <strong>C++20</strong> compiler (GCC or Clang). CMake 3.10+ is only required for the tests, benchmarks and docs — the corelib itself is a handful of <span class="mono">.c</span> files you can drop into any build.</p>
-                            <div class="code-card">
-                                <div class="code-head">
-                                    <div class="dots"><span></span><span></span><span></span></div>
-                                    <span class="fname">zsh</span>
-                                    <button class="copy" type="button">Copy</button>
-                                </div>
-<pre class="code">xcode-select --install
-brew install cmake</pre>
-                            </div>
-                        </div>
-                        <div class="istep" data-os="windows">
-                            <p class="istep-h"><span class="inum">1</span>Get a compiler and CMake</p>
-                            <p class="istep-note">Needs a <strong>C99</strong> and/or <strong>C++20</strong> compiler (GCC or Clang). CMake 3.10+ is only required for the tests, benchmarks and docs — the corelib itself is a handful of <span class="mono">.c</span> files you can drop into any build.</p>
-                            <div class="code-card">
-                                <div class="code-head">
-                                    <div class="dots"><span></span><span></span><span></span></div>
-                                    <span class="fname">PowerShell</span>
-                                    <button class="copy" type="button">Copy</button>
-                                </div>
-<pre class="code">winget install -e --id Kitware.CMake
-winget install -e --id LLVM.LLVM</pre>
-                            </div>
-                        </div>
                         <div class="istep">
-                            <p class="istep-h"><span class="inum">2</span>Pull it into your build</p>
+                            <p class="istep-h">Pull it into your build</p>
                             <p class="istep-note">Distributed as the port <span class="mono">sofa-buffers-corelib-c-cpp</span>; every route exposes the same target <span class="mono">sofa-buffers::corelib</span> and <span class="mono">#include &lt;sofab/…&gt;</span>. Also packaged for Conan, Arduino and PlatformIO.</p>
                             <div class="code-card">
                                 <div class="code-head">
@@ -691,52 +668,16 @@ target_link_libraries(my_app PRIVATE sofa-buffers::corelib)</pre>
                             </div>
                         </div>
                     </div>
-                    <div class="ipanel" id="ip-cpp" role="tabpanel" aria-labelledby="it-cpp" hidden>
+                    <div class="ipanel" id="ip-cpp" role="tabpanel" aria-labelledby="it-cpp" data-noos="1" hidden>
                         <div class="ipanel-head">
                             <h3>corelib-cpp</h3>
-                            <p>Pure C++20, written from scratch with no C backend and tuned for raw throughput. Header-only.</p>
+                            <p>Written from scratch with no C backend and tuned for raw throughput.</p>
+                            <p class="ireq"><b>Requires</b> A C++20 compiler — GCC 11+, Clang 14+ or MSVC 19.30+ · header-only, no build step</p>
+                            <p class="isame">Same command on Linux, macOS and Windows</p>
                             <a class="ilink" href="https://github.com/sofa-buffers/corelib-cpp" target="_blank" rel="noopener">Full README on GitHub &rarr;</a>
                         </div>
-                        <div class="istep" data-os="linux">
-                            <p class="istep-h"><span class="inum">1</span>Get a C++20 compiler and CMake</p>
-                            <p class="istep-note">GCC 11+, Clang 14+ or MSVC 19.30+. CMake 3.10+ builds the tests, benchmarks and docs — the library itself is header-only and needs no build step.</p>
-                            <div class="code-card">
-                                <div class="code-head">
-                                    <div class="dots"><span></span><span></span><span></span></div>
-                                    <span class="fname">bash</span>
-                                    <button class="copy" type="button">Copy</button>
-                                </div>
-<pre class="code">sudo apt install -y build-essential cmake</pre>
-                            </div>
-                        </div>
-                        <div class="istep" data-os="mac">
-                            <p class="istep-h"><span class="inum">1</span>Get a C++20 compiler and CMake</p>
-                            <p class="istep-note">GCC 11+, Clang 14+ or MSVC 19.30+. CMake 3.10+ builds the tests, benchmarks and docs — the library itself is header-only and needs no build step.</p>
-                            <div class="code-card">
-                                <div class="code-head">
-                                    <div class="dots"><span></span><span></span><span></span></div>
-                                    <span class="fname">zsh</span>
-                                    <button class="copy" type="button">Copy</button>
-                                </div>
-<pre class="code">xcode-select --install
-brew install cmake</pre>
-                            </div>
-                        </div>
-                        <div class="istep" data-os="windows">
-                            <p class="istep-h"><span class="inum">1</span>Get a C++20 compiler and CMake</p>
-                            <p class="istep-note">GCC 11+, Clang 14+ or MSVC 19.30+. CMake 3.10+ builds the tests, benchmarks and docs — the library itself is header-only and needs no build step.</p>
-                            <div class="code-card">
-                                <div class="code-head">
-                                    <div class="dots"><span></span><span></span><span></span></div>
-                                    <span class="fname">PowerShell</span>
-                                    <button class="copy" type="button">Copy</button>
-                                </div>
-<pre class="code">winget install -e --id Kitware.CMake
-winget install -e --id Microsoft.VisualStudio.2022.BuildTools</pre>
-                            </div>
-                        </div>
                         <div class="istep">
-                            <p class="istep-h"><span class="inum">2</span>Pull it into your build</p>
+                            <p class="istep-h">Pull it into your build</p>
                             <p class="istep-note">Distributed as the port <span class="mono">sofa-buffers-corelib-cpp</span>. A Conan package of the same name installs a CMake config exposing the same <span class="mono">sofa-buffers::corelib</span> target.</p>
                             <div class="code-card">
                                 <div class="code-head">
@@ -755,105 +696,37 @@ target_link_libraries(my_app PRIVATE sofa-buffers::corelib)</pre>
                             </div>
                         </div>
                     </div>
-                    <div class="ipanel" id="ip-rs" role="tabpanel" aria-labelledby="it-rs" hidden>
+                    <div class="ipanel" id="ip-rs" role="tabpanel" aria-labelledby="it-rs" data-noos="1" hidden>
                         <div class="ipanel-head">
                             <h3>corelib-rs</h3>
-                            <p>The high-speed <span class="mono">std</span> build for big machines. Rust 1.70+, edition 2021, no runtime dependencies.</p>
+                            <p>The high-speed <span class="mono">std</span> build for big machines — the standard library and nothing else at runtime.</p>
+                            <p class="ireq"><b>Requires</b> Rust 1.70+, edition 2021</p>
+                            <p class="isame">Same command on Linux, macOS and Windows</p>
                             <a class="ilink" href="https://github.com/sofa-buffers/corelib-rs" target="_blank" rel="noopener">Full README on GitHub &rarr;</a>
                         </div>
-                        <div class="istep" data-os="linux">
-                            <p class="istep-h"><span class="inum">1</span>Install the Rust toolchain</p>
-                            <p class="istep-note">Rust <strong>1.70+</strong> (edition 2021). Skip this if <span class="mono">cargo</span> is already on your PATH.</p>
-                            <div class="code-card">
-                                <div class="code-head">
-                                    <div class="dots"><span></span><span></span><span></span></div>
-                                    <span class="fname">bash</span>
-                                    <button class="copy" type="button">Copy</button>
-                                </div>
-<pre class="code">curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh</pre>
-                            </div>
-                        </div>
-                        <div class="istep" data-os="mac">
-                            <p class="istep-h"><span class="inum">1</span>Install the Rust toolchain</p>
-                            <p class="istep-note">Rust <strong>1.70+</strong> (edition 2021). Skip this if <span class="mono">cargo</span> is already on your PATH.</p>
-                            <div class="code-card">
-                                <div class="code-head">
-                                    <div class="dots"><span></span><span></span><span></span></div>
-                                    <span class="fname">zsh</span>
-                                    <button class="copy" type="button">Copy</button>
-                                </div>
-<pre class="code">curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh</pre>
-                            </div>
-                        </div>
-                        <div class="istep" data-os="windows">
-                            <p class="istep-h"><span class="inum">1</span>Install the Rust toolchain</p>
-                            <p class="istep-note">Rust <strong>1.70+</strong> (edition 2021). Skip this if <span class="mono">cargo</span> is already on your PATH.</p>
-                            <div class="code-card">
-                                <div class="code-head">
-                                    <div class="dots"><span></span><span></span><span></span></div>
-                                    <span class="fname">PowerShell</span>
-                                    <button class="copy" type="button">Copy</button>
-                                </div>
-<pre class="code">winget install -e --id Rustlang.Rustup</pre>
-                            </div>
-                        </div>
                         <div class="istep">
-                            <p class="istep-h"><span class="inum">2</span>Add the crate</p>
+                            <p class="istep-h">Add the crate</p>
                             <p class="istep-note">Published on crates.io as <span class="mono">sofa-buffers-corelib</span>; the importable namespace is <span class="mono">sofab</span> — <span class="mono">use sofab::{OStream, decode};</span></p>
                             <div class="code-card">
                                 <div class="code-head">
                                     <div class="dots"><span></span><span></span><span></span></div>
-                                    <span class="fname">bash</span>
+                                    <span class="fname">any shell</span>
                                     <button class="copy" type="button">Copy</button>
                                 </div>
 <pre class="code">cargo add sofa-buffers-corelib</pre>
                             </div>
                         </div>
                     </div>
-                    <div class="ipanel" id="ip-rs-no-std" role="tabpanel" aria-labelledby="it-rs-no-std" hidden>
+                    <div class="ipanel" id="ip-rs-no-std" role="tabpanel" aria-labelledby="it-rs-no-std" data-noos="1" hidden>
                         <div class="ipanel-head">
                             <h3>corelib-rs-no-std</h3>
                             <p><span class="mono">core</span>-only, no allocator, <span class="mono">#![forbid(unsafe_code)]</span> — for microcontrollers.</p>
+                            <p class="ireq"><b>Requires</b> Rust 1.70+ (MSRV), edition 2021, stable</p>
+                            <p class="isame">Same command on Linux, macOS and Windows</p>
                             <a class="ilink" href="https://github.com/sofa-buffers/corelib-rs-no-std" target="_blank" rel="noopener">Full README on GitHub &rarr;</a>
                         </div>
-                        <div class="istep" data-os="linux">
-                            <p class="istep-h"><span class="inum">1</span>Install the Rust toolchain</p>
-                            <p class="istep-note">Rust <strong>1.70+</strong> (MSRV), edition 2021, stable.</p>
-                            <div class="code-card">
-                                <div class="code-head">
-                                    <div class="dots"><span></span><span></span><span></span></div>
-                                    <span class="fname">bash</span>
-                                    <button class="copy" type="button">Copy</button>
-                                </div>
-<pre class="code">curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh</pre>
-                            </div>
-                        </div>
-                        <div class="istep" data-os="mac">
-                            <p class="istep-h"><span class="inum">1</span>Install the Rust toolchain</p>
-                            <p class="istep-note">Rust <strong>1.70+</strong> (MSRV), edition 2021, stable.</p>
-                            <div class="code-card">
-                                <div class="code-head">
-                                    <div class="dots"><span></span><span></span><span></span></div>
-                                    <span class="fname">zsh</span>
-                                    <button class="copy" type="button">Copy</button>
-                                </div>
-<pre class="code">curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh</pre>
-                            </div>
-                        </div>
-                        <div class="istep" data-os="windows">
-                            <p class="istep-h"><span class="inum">1</span>Install the Rust toolchain</p>
-                            <p class="istep-note">Rust <strong>1.70+</strong> (MSRV), edition 2021, stable.</p>
-                            <div class="code-card">
-                                <div class="code-head">
-                                    <div class="dots"><span></span><span></span><span></span></div>
-                                    <span class="fname">PowerShell</span>
-                                    <button class="copy" type="button">Copy</button>
-                                </div>
-<pre class="code">winget install -e --id Rustlang.Rustup</pre>
-                            </div>
-                        </div>
                         <div class="istep">
-                            <p class="istep-h"><span class="inum">2</span>Add the crate</p>
+                            <p class="istep-h"><span class="inum">1</span>Add the crate</p>
                             <p class="istep-note">The crates.io package is <span class="mono">sofa-buffers-corelib-no-std</span>; the crate you <span class="mono">use</span> is <span class="mono">sofab</span>.</p>
                             <div class="code-card">
                                 <div class="code-head">
@@ -865,7 +738,7 @@ target_link_libraries(my_app PRIVATE sofa-buffers::corelib)</pre>
                             </div>
                         </div>
                         <div class="istep">
-                            <p class="istep-h"><span class="inum">3</span>Add your bare-metal target</p>
+                            <p class="istep-h"><span class="inum">2</span>Add your bare-metal target</p>
                             <p class="istep-note">Builds on any target — <span class="mono">thumbv6m</span>, <span class="mono">thumbv7em</span>, <span class="mono">riscv32imc</span> and friends. Nothing is boxed, so there is no <span class="mono">alloc</span> to provide.</p>
                             <div class="code-card">
                                 <div class="code-head">
@@ -877,50 +750,16 @@ target_link_libraries(my_app PRIVATE sofa-buffers::corelib)</pre>
                             </div>
                         </div>
                     </div>
-                    <div class="ipanel" id="ip-go" role="tabpanel" aria-labelledby="it-go" hidden>
+                    <div class="ipanel" id="ip-go" role="tabpanel" aria-labelledby="it-go" data-noos="1" hidden>
                         <div class="ipanel-head">
                             <h3>corelib-go</h3>
                             <p>Streaming, dependency-free runtime core — standard library only, no cgo.</p>
+                            <p class="ireq"><b>Requires</b> Go 1.21+</p>
+                            <p class="isame">Same command on Linux, macOS and Windows</p>
                             <a class="ilink" href="https://github.com/sofa-buffers/corelib-go" target="_blank" rel="noopener">Full README on GitHub &rarr;</a>
                         </div>
-                        <div class="istep" data-os="linux">
-                            <p class="istep-h"><span class="inum">1</span>Install Go</p>
-                            <p class="istep-note">Go <strong>1.21+</strong>. If your distro ships an older Go, grab the current release from <a href="https://go.dev/dl/" target="_blank" rel="noopener">go.dev/dl</a>.</p>
-                            <div class="code-card">
-                                <div class="code-head">
-                                    <div class="dots"><span></span><span></span><span></span></div>
-                                    <span class="fname">bash</span>
-                                    <button class="copy" type="button">Copy</button>
-                                </div>
-<pre class="code">sudo apt install -y golang-go</pre>
-                            </div>
-                        </div>
-                        <div class="istep" data-os="mac">
-                            <p class="istep-h"><span class="inum">1</span>Install Go</p>
-                            <p class="istep-note">Go <strong>1.21+</strong>. If your distro ships an older Go, grab the current release from <a href="https://go.dev/dl/" target="_blank" rel="noopener">go.dev/dl</a>.</p>
-                            <div class="code-card">
-                                <div class="code-head">
-                                    <div class="dots"><span></span><span></span><span></span></div>
-                                    <span class="fname">zsh</span>
-                                    <button class="copy" type="button">Copy</button>
-                                </div>
-<pre class="code">brew install go</pre>
-                            </div>
-                        </div>
-                        <div class="istep" data-os="windows">
-                            <p class="istep-h"><span class="inum">1</span>Install Go</p>
-                            <p class="istep-note">Go <strong>1.21+</strong>. If your distro ships an older Go, grab the current release from <a href="https://go.dev/dl/" target="_blank" rel="noopener">go.dev/dl</a>.</p>
-                            <div class="code-card">
-                                <div class="code-head">
-                                    <div class="dots"><span></span><span></span><span></span></div>
-                                    <span class="fname">PowerShell</span>
-                                    <button class="copy" type="button">Copy</button>
-                                </div>
-<pre class="code">winget install -e --id GoLang.Go</pre>
-                            </div>
-                        </div>
                         <div class="istep">
-                            <p class="istep-h"><span class="inum">2</span>Add the module</p>
+                            <p class="istep-h">Add the module</p>
                             <p class="istep-note">The module path is <span class="mono">github.com/sofa-buffers/corelib-go</span>; the imported package is <span class="mono">sofab</span> — <span class="mono">import sofab "github.com/sofa-buffers/corelib-go"</span></p>
                             <div class="code-card">
                                 <div class="code-head">
@@ -932,50 +771,16 @@ target_link_libraries(my_app PRIVATE sofa-buffers::corelib)</pre>
                             </div>
                         </div>
                     </div>
-                    <div class="ipanel" id="ip-py" role="tabpanel" aria-labelledby="it-py" hidden>
+                    <div class="ipanel" id="ip-py" role="tabpanel" aria-labelledby="it-py" data-noos="1" hidden>
                         <div class="ipanel-head">
                             <h3>corelib-py</h3>
-                            <p>Pure Python 3.9+ with zero runtime dependencies, plus an optional native accelerator.</p>
+                            <p>Pure Python with zero runtime dependencies, plus an optional native accelerator.</p>
+                            <p class="ireq"><b>Requires</b> Python 3.9+ (CPython or PyPy)</p>
+                            <p class="isame">Same command on Linux, macOS and Windows</p>
                             <a class="ilink" href="https://github.com/sofa-buffers/corelib-py" target="_blank" rel="noopener">Full README on GitHub &rarr;</a>
                         </div>
-                        <div class="istep" data-os="linux">
-                            <p class="istep-h"><span class="inum">1</span>Install Python</p>
-                            <p class="istep-note">Python <strong>3.9 or newer</strong> (CPython or PyPy).</p>
-                            <div class="code-card">
-                                <div class="code-head">
-                                    <div class="dots"><span></span><span></span><span></span></div>
-                                    <span class="fname">bash</span>
-                                    <button class="copy" type="button">Copy</button>
-                                </div>
-<pre class="code">sudo apt install -y python3 python3-pip</pre>
-                            </div>
-                        </div>
-                        <div class="istep" data-os="mac">
-                            <p class="istep-h"><span class="inum">1</span>Install Python</p>
-                            <p class="istep-note">Python <strong>3.9 or newer</strong> (CPython or PyPy).</p>
-                            <div class="code-card">
-                                <div class="code-head">
-                                    <div class="dots"><span></span><span></span><span></span></div>
-                                    <span class="fname">zsh</span>
-                                    <button class="copy" type="button">Copy</button>
-                                </div>
-<pre class="code">brew install python</pre>
-                            </div>
-                        </div>
-                        <div class="istep" data-os="windows">
-                            <p class="istep-h"><span class="inum">1</span>Install Python</p>
-                            <p class="istep-note">Python <strong>3.9 or newer</strong> (CPython or PyPy).</p>
-                            <div class="code-card">
-                                <div class="code-head">
-                                    <div class="dots"><span></span><span></span><span></span></div>
-                                    <span class="fname">PowerShell</span>
-                                    <button class="copy" type="button">Copy</button>
-                                </div>
-<pre class="code">winget install -e --id Python.Python.3.13</pre>
-                            </div>
-                        </div>
                         <div class="istep">
-                            <p class="istep-h"><span class="inum">2</span>Install the package</p>
+                            <p class="istep-h">Install the package</p>
                             <p class="istep-note">Distribution <span class="mono">sofa-buffers-corelib</span> on PyPI; the import package is <span class="mono">sofab</span>.</p>
                             <div class="code-card">
                                 <div class="code-head">
@@ -987,50 +792,16 @@ target_link_libraries(my_app PRIVATE sofa-buffers::corelib)</pre>
                             </div>
                         </div>
                     </div>
-                    <div class="ipanel" id="ip-ts" role="tabpanel" aria-labelledby="it-ts" hidden>
+                    <div class="ipanel" id="ip-ts" role="tabpanel" aria-labelledby="it-ts" data-noos="1" hidden>
                         <div class="ipanel-head">
                             <h3>corelib-ts</h3>
                             <p>Runs on Node, browsers, Deno and Bun. Zero runtime dependencies, ESM + CJS + browser IIFE.</p>
+                            <p class="ireq"><b>Requires</b> Node 20+ — or any modern browser, Deno or Bun</p>
+                            <p class="isame">Same command on Linux, macOS and Windows</p>
                             <a class="ilink" href="https://github.com/sofa-buffers/corelib-ts" target="_blank" rel="noopener">Full README on GitHub &rarr;</a>
                         </div>
-                        <div class="istep" data-os="linux">
-                            <p class="istep-h"><span class="inum">1</span>Install Node.js</p>
-                            <p class="istep-note">Node <strong>20+</strong> — or skip this entirely and run it in a browser, Deno or Bun. Downloads at <a href="https://nodejs.org/" target="_blank" rel="noopener">nodejs.org</a>.</p>
-                            <div class="code-card">
-                                <div class="code-head">
-                                    <div class="dots"><span></span><span></span><span></span></div>
-                                    <span class="fname">bash</span>
-                                    <button class="copy" type="button">Copy</button>
-                                </div>
-<pre class="code">sudo apt install -y nodejs npm</pre>
-                            </div>
-                        </div>
-                        <div class="istep" data-os="mac">
-                            <p class="istep-h"><span class="inum">1</span>Install Node.js</p>
-                            <p class="istep-note">Node <strong>20+</strong> — or skip this entirely and run it in a browser, Deno or Bun. Downloads at <a href="https://nodejs.org/" target="_blank" rel="noopener">nodejs.org</a>.</p>
-                            <div class="code-card">
-                                <div class="code-head">
-                                    <div class="dots"><span></span><span></span><span></span></div>
-                                    <span class="fname">zsh</span>
-                                    <button class="copy" type="button">Copy</button>
-                                </div>
-<pre class="code">brew install node</pre>
-                            </div>
-                        </div>
-                        <div class="istep" data-os="windows">
-                            <p class="istep-h"><span class="inum">1</span>Install Node.js</p>
-                            <p class="istep-note">Node <strong>20+</strong> — or skip this entirely and run it in a browser, Deno or Bun. Downloads at <a href="https://nodejs.org/" target="_blank" rel="noopener">nodejs.org</a>.</p>
-                            <div class="code-card">
-                                <div class="code-head">
-                                    <div class="dots"><span></span><span></span><span></span></div>
-                                    <span class="fname">PowerShell</span>
-                                    <button class="copy" type="button">Copy</button>
-                                </div>
-<pre class="code">winget install -e --id OpenJS.NodeJS</pre>
-                            </div>
-                        </div>
                         <div class="istep">
-                            <p class="istep-h"><span class="inum">2</span>Install the package</p>
+                            <p class="istep-h">Install the package</p>
                             <p class="istep-note">Ships ESM (<span class="mono">.js</span>), CommonJS (<span class="mono">.cjs</span>), a browser IIFE global (<span class="mono">SofaBuffers</span>) and full type declarations.</p>
                             <div class="code-card">
                                 <div class="code-head">
@@ -1042,51 +813,16 @@ target_link_libraries(my_app PRIVATE sofa-buffers::corelib)</pre>
                             </div>
                         </div>
                     </div>
-                    <div class="ipanel" id="ip-java" role="tabpanel" aria-labelledby="it-java" hidden>
+                    <div class="ipanel" id="ip-java" role="tabpanel" aria-labelledby="it-java" data-noos="1" hidden>
                         <div class="ipanel-head">
                             <h3>corelib-java</h3>
                             <p>Allocation-light and runs anywhere a JVM does. Runtime dependencies: none.</p>
+                            <p class="ireq"><b>Requires</b> JDK 17+</p>
+                            <p class="isame">Same command on Linux, macOS and Windows</p>
                             <a class="ilink" href="https://github.com/sofa-buffers/corelib-java" target="_blank" rel="noopener">Full README on GitHub &rarr;</a>
                         </div>
-                        <div class="istep" data-os="linux">
-                            <p class="istep-h"><span class="inum">1</span>Install a JDK</p>
-                            <p class="istep-note"><strong>JDK 17+</strong> (CI builds on 17, 21 and 25). Add Maven if that is your build tool.</p>
-                            <div class="code-card">
-                                <div class="code-head">
-                                    <div class="dots"><span></span><span></span><span></span></div>
-                                    <span class="fname">bash</span>
-                                    <button class="copy" type="button">Copy</button>
-                                </div>
-<pre class="code">sudo apt install -y openjdk-17-jdk maven</pre>
-                            </div>
-                        </div>
-                        <div class="istep" data-os="mac">
-                            <p class="istep-h"><span class="inum">1</span>Install a JDK</p>
-                            <p class="istep-note"><strong>JDK 17+</strong> (CI builds on 17, 21 and 25). Add Maven if that is your build tool.</p>
-                            <div class="code-card">
-                                <div class="code-head">
-                                    <div class="dots"><span></span><span></span><span></span></div>
-                                    <span class="fname">zsh</span>
-                                    <button class="copy" type="button">Copy</button>
-                                </div>
-<pre class="code">brew install openjdk@17 maven</pre>
-                            </div>
-                        </div>
-                        <div class="istep" data-os="windows">
-                            <p class="istep-h"><span class="inum">1</span>Install a JDK</p>
-                            <p class="istep-note"><strong>JDK 17+</strong> (CI builds on 17, 21 and 25). Add Maven if that is your build tool.</p>
-                            <div class="code-card">
-                                <div class="code-head">
-                                    <div class="dots"><span></span><span></span><span></span></div>
-                                    <span class="fname">PowerShell</span>
-                                    <button class="copy" type="button">Copy</button>
-                                </div>
-<pre class="code">winget install -e --id Microsoft.OpenJDK.17
-winget install -e --id Apache.Maven</pre>
-                            </div>
-                        </div>
                         <div class="istep">
-                            <p class="istep-h"><span class="inum">2</span>Declare the dependency</p>
+                            <p class="istep-h">Declare the dependency</p>
                             <p class="istep-note">Maven coordinates <span class="mono">org.sofabuffers:corelib</span>; the import namespace is the package <span class="mono">org.sofabuffers.sofab</span>.</p>
                             <p class="icap">Maven</p>
                             <div class="code-card">
@@ -1112,50 +848,16 @@ winget install -e --id Apache.Maven</pre>
                             </div>
                         </div>
                     </div>
-                    <div class="ipanel" id="ip-kotlin" role="tabpanel" aria-labelledby="it-kotlin" hidden>
+                    <div class="ipanel" id="ip-kotlin" role="tabpanel" aria-labelledby="it-kotlin" data-noos="1" hidden>
                         <div class="ipanel-head">
                             <h3>corelib-kotlin-mp</h3>
                             <p>One multiplatform codec for JVM, JS and native targets — Kotlin standard library and nothing else.</p>
+                            <p class="ireq"><b>Requires</b> JDK 17+ · the Gradle wrapper pins Kotlin 2.4+ and Gradle 8.14.4+</p>
+                            <p class="isame">Same command on Linux, macOS and Windows</p>
                             <a class="ilink" href="https://github.com/sofa-buffers/corelib-kotlin-mp" target="_blank" rel="noopener">Full README on GitHub &rarr;</a>
                         </div>
-                        <div class="istep" data-os="linux">
-                            <p class="istep-h"><span class="inum">1</span>Install a JDK</p>
-                            <p class="istep-note"><strong>JDK 17+</strong> for the JVM target and for running the build; the Gradle wrapper pins Kotlin 2.4+ and Gradle 8.14.4+ for you.</p>
-                            <div class="code-card">
-                                <div class="code-head">
-                                    <div class="dots"><span></span><span></span><span></span></div>
-                                    <span class="fname">bash</span>
-                                    <button class="copy" type="button">Copy</button>
-                                </div>
-<pre class="code">sudo apt install -y openjdk-17-jdk</pre>
-                            </div>
-                        </div>
-                        <div class="istep" data-os="mac">
-                            <p class="istep-h"><span class="inum">1</span>Install a JDK</p>
-                            <p class="istep-note"><strong>JDK 17+</strong> for the JVM target and for running the build; the Gradle wrapper pins Kotlin 2.4+ and Gradle 8.14.4+ for you.</p>
-                            <div class="code-card">
-                                <div class="code-head">
-                                    <div class="dots"><span></span><span></span><span></span></div>
-                                    <span class="fname">zsh</span>
-                                    <button class="copy" type="button">Copy</button>
-                                </div>
-<pre class="code">brew install openjdk@17</pre>
-                            </div>
-                        </div>
-                        <div class="istep" data-os="windows">
-                            <p class="istep-h"><span class="inum">1</span>Install a JDK</p>
-                            <p class="istep-note"><strong>JDK 17+</strong> for the JVM target and for running the build; the Gradle wrapper pins Kotlin 2.4+ and Gradle 8.14.4+ for you.</p>
-                            <div class="code-card">
-                                <div class="code-head">
-                                    <div class="dots"><span></span><span></span><span></span></div>
-                                    <span class="fname">PowerShell</span>
-                                    <button class="copy" type="button">Copy</button>
-                                </div>
-<pre class="code">winget install -e --id Microsoft.OpenJDK.17</pre>
-                            </div>
-                        </div>
                         <div class="istep">
-                            <p class="istep-h"><span class="inum">2</span>Declare the dependency</p>
+                            <p class="istep-h">Declare the dependency</p>
                             <p class="istep-note">Built and tested for <span class="mono">jvm</span>, <span class="mono">js</span> (Node + browser), <span class="mono">linuxX64</span> and <span class="mono">linuxArm64</span>; the import namespace is <span class="mono">org.sofabuffers.sofab</span>.</p>
                             <div class="code-card">
                                 <div class="code-head">
@@ -1169,50 +871,16 @@ winget install -e --id Apache.Maven</pre>
                             </div>
                         </div>
                     </div>
-                    <div class="ipanel" id="ip-cs" role="tabpanel" aria-labelledby="it-cs" hidden>
+                    <div class="ipanel" id="ip-cs" role="tabpanel" aria-labelledby="it-cs" data-noos="1" hidden>
                         <div class="ipanel-head">
                             <h3>corelib-cs</h3>
                             <p>Allocation-light .NET with no reflection and no runtime codegen — friendly to trimming and Native AOT.</p>
+                            <p class="ireq"><b>Requires</b> .NET 9 or later</p>
+                            <p class="isame">Same command on Linux, macOS and Windows</p>
                             <a class="ilink" href="https://github.com/sofa-buffers/corelib-cs" target="_blank" rel="noopener">Full README on GitHub &rarr;</a>
                         </div>
-                        <div class="istep" data-os="linux">
-                            <p class="istep-h"><span class="inum">1</span>Install the .NET SDK</p>
-                            <p class="istep-note">Consuming the published package needs only <strong>.NET 9 or later</strong>.</p>
-                            <div class="code-card">
-                                <div class="code-head">
-                                    <div class="dots"><span></span><span></span><span></span></div>
-                                    <span class="fname">bash</span>
-                                    <button class="copy" type="button">Copy</button>
-                                </div>
-<pre class="code">sudo apt install -y dotnet-sdk-9.0</pre>
-                            </div>
-                        </div>
-                        <div class="istep" data-os="mac">
-                            <p class="istep-h"><span class="inum">1</span>Install the .NET SDK</p>
-                            <p class="istep-note">Consuming the published package needs only <strong>.NET 9 or later</strong>.</p>
-                            <div class="code-card">
-                                <div class="code-head">
-                                    <div class="dots"><span></span><span></span><span></span></div>
-                                    <span class="fname">zsh</span>
-                                    <button class="copy" type="button">Copy</button>
-                                </div>
-<pre class="code">brew install --cask dotnet-sdk</pre>
-                            </div>
-                        </div>
-                        <div class="istep" data-os="windows">
-                            <p class="istep-h"><span class="inum">1</span>Install the .NET SDK</p>
-                            <p class="istep-note">Consuming the published package needs only <strong>.NET 9 or later</strong>.</p>
-                            <div class="code-card">
-                                <div class="code-head">
-                                    <div class="dots"><span></span><span></span><span></span></div>
-                                    <span class="fname">PowerShell</span>
-                                    <button class="copy" type="button">Copy</button>
-                                </div>
-<pre class="code">winget install -e --id Microsoft.DotNet.SDK.9</pre>
-                            </div>
-                        </div>
                         <div class="istep">
-                            <p class="istep-h"><span class="inum">2</span>Add the package</p>
+                            <p class="istep-h">Add the package</p>
                             <p class="istep-note">NuGet id <span class="mono">SofaBuffers.Corelib</span>; the assembly is <span class="mono">SofaBuffers.dll</span> and the public API lives under the <span class="mono">sofab</span> namespace.</p>
                             <div class="code-card">
                                 <div class="code-head">
@@ -1224,54 +892,16 @@ winget install -e --id Apache.Maven</pre>
                             </div>
                         </div>
                     </div>
-                    <div class="ipanel" id="ip-dart" role="tabpanel" aria-labelledby="it-dart" hidden>
+                    <div class="ipanel" id="ip-dart" role="tabpanel" aria-labelledby="it-dart" data-noos="1" hidden>
                         <div class="ipanel-head">
                             <h3>corelib-dart</h3>
                             <p>Pure Dart, streaming, zero runtime dependencies.</p>
+                            <p class="ireq"><b>Requires</b> Dart SDK 3.8.0 or newer</p>
+                            <p class="isame">Same command on Linux, macOS and Windows</p>
                             <a class="ilink" href="https://github.com/sofa-buffers/corelib-dart" target="_blank" rel="noopener">Full README on GitHub &rarr;</a>
                         </div>
-                        <div class="istep" data-os="linux">
-                            <p class="istep-h"><span class="inum">1</span>Install the Dart SDK</p>
-                            <p class="istep-note"><strong>Dart SDK ≥ 3.8.0</strong> — the floor <span class="mono">pubspec.yaml</span> enforces. Other routes (and the Flutter SDK, which bundles Dart) at <a href="https://dart.dev/get-dart" target="_blank" rel="noopener">dart.dev/get-dart</a>.</p>
-                            <div class="code-card">
-                                <div class="code-head">
-                                    <div class="dots"><span></span><span></span><span></span></div>
-                                    <span class="fname">bash</span>
-                                    <button class="copy" type="button">Copy</button>
-                                </div>
-<pre class="code">sudo apt install -y apt-transport-https wget gpg
-wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor -o /usr/share/keyrings/dart.gpg
-echo 'deb [signed-by=/usr/share/keyrings/dart.gpg arch=amd64] https://storage.googleapis.com/download.dartlang.org/linux/debian stable main' | sudo tee /etc/apt/sources.list.d/dart_stable.list
-sudo apt update &amp;&amp; sudo apt install -y dart</pre>
-                            </div>
-                        </div>
-                        <div class="istep" data-os="mac">
-                            <p class="istep-h"><span class="inum">1</span>Install the Dart SDK</p>
-                            <p class="istep-note"><strong>Dart SDK ≥ 3.8.0</strong> — the floor <span class="mono">pubspec.yaml</span> enforces. Other routes (and the Flutter SDK, which bundles Dart) at <a href="https://dart.dev/get-dart" target="_blank" rel="noopener">dart.dev/get-dart</a>.</p>
-                            <div class="code-card">
-                                <div class="code-head">
-                                    <div class="dots"><span></span><span></span><span></span></div>
-                                    <span class="fname">zsh</span>
-                                    <button class="copy" type="button">Copy</button>
-                                </div>
-<pre class="code">brew tap dart-lang/dart
-brew install dart</pre>
-                            </div>
-                        </div>
-                        <div class="istep" data-os="windows">
-                            <p class="istep-h"><span class="inum">1</span>Install the Dart SDK</p>
-                            <p class="istep-note"><strong>Dart SDK ≥ 3.8.0</strong> — the floor <span class="mono">pubspec.yaml</span> enforces. Other routes (and the Flutter SDK, which bundles Dart) at <a href="https://dart.dev/get-dart" target="_blank" rel="noopener">dart.dev/get-dart</a>.</p>
-                            <div class="code-card">
-                                <div class="code-head">
-                                    <div class="dots"><span></span><span></span><span></span></div>
-                                    <span class="fname">PowerShell</span>
-                                    <button class="copy" type="button">Copy</button>
-                                </div>
-<pre class="code">choco install dart-sdk</pre>
-                            </div>
-                        </div>
                         <div class="istep">
-                            <p class="istep-h"><span class="inum">2</span>Add the package</p>
+                            <p class="istep-h">Add the package</p>
                             <p class="istep-note">pub.dev requires lowercase names, so the published package is <span class="mono">sofabuffers</span> — you install <span class="mono">sofabuffers</span> and import it as <span class="mono">sofab</span>.</p>
                             <div class="code-card">
                                 <div class="code-head">
@@ -1283,50 +913,16 @@ brew install dart</pre>
                             </div>
                         </div>
                     </div>
-                    <div class="ipanel" id="ip-zig" role="tabpanel" aria-labelledby="it-zig" hidden>
+                    <div class="ipanel" id="ip-zig" role="tabpanel" aria-labelledby="it-zig" data-noos="1" hidden>
                         <div class="ipanel-head">
                             <h3>corelib-zig</h3>
                             <p>Allocator-free and comptime-dispatched for maximum throughput — Zig standard library only.</p>
+                            <p class="ireq"><b>Requires</b> Zig 0.16.0 or newer</p>
+                            <p class="isame">Same command on Linux, macOS and Windows</p>
                             <a class="ilink" href="https://github.com/sofa-buffers/corelib-zig" target="_blank" rel="noopener">Full README on GitHub &rarr;</a>
                         </div>
-                        <div class="istep" data-os="linux">
-                            <p class="istep-h"><span class="inum">1</span>Install Zig</p>
-                            <p class="istep-note"><strong>Zig 0.16.0 or newer</strong>. Tarballs for every platform are at <a href="https://ziglang.org/download/" target="_blank" rel="noopener">ziglang.org/download</a>.</p>
-                            <div class="code-card">
-                                <div class="code-head">
-                                    <div class="dots"><span></span><span></span><span></span></div>
-                                    <span class="fname">bash</span>
-                                    <button class="copy" type="button">Copy</button>
-                                </div>
-<pre class="code">sudo snap install zig --classic --beta</pre>
-                            </div>
-                        </div>
-                        <div class="istep" data-os="mac">
-                            <p class="istep-h"><span class="inum">1</span>Install Zig</p>
-                            <p class="istep-note"><strong>Zig 0.16.0 or newer</strong>. Tarballs for every platform are at <a href="https://ziglang.org/download/" target="_blank" rel="noopener">ziglang.org/download</a>.</p>
-                            <div class="code-card">
-                                <div class="code-head">
-                                    <div class="dots"><span></span><span></span><span></span></div>
-                                    <span class="fname">zsh</span>
-                                    <button class="copy" type="button">Copy</button>
-                                </div>
-<pre class="code">brew install zig</pre>
-                            </div>
-                        </div>
-                        <div class="istep" data-os="windows">
-                            <p class="istep-h"><span class="inum">1</span>Install Zig</p>
-                            <p class="istep-note"><strong>Zig 0.16.0 or newer</strong>. Tarballs for every platform are at <a href="https://ziglang.org/download/" target="_blank" rel="noopener">ziglang.org/download</a>.</p>
-                            <div class="code-card">
-                                <div class="code-head">
-                                    <div class="dots"><span></span><span></span><span></span></div>
-                                    <span class="fname">PowerShell</span>
-                                    <button class="copy" type="button">Copy</button>
-                                </div>
-<pre class="code">winget install -e --id zig.zig</pre>
-                            </div>
-                        </div>
                         <div class="istep">
-                            <p class="istep-h"><span class="inum">2</span>Fetch the package</p>
+                            <p class="istep-h"><span class="inum">1</span>Fetch the package</p>
                             <p class="istep-note">Pin the release with the <span class="mono">#</span>-ref — without one, <span class="mono">zig fetch</span> resolves whatever the default branch points at right then. <span class="mono">--save</span> writes the resolved hash into your <span class="mono">build.zig.zon</span>.</p>
                             <div class="code-card">
                                 <div class="code-head">
@@ -1338,7 +934,7 @@ brew install dart</pre>
                             </div>
                         </div>
                         <div class="istep">
-                            <p class="istep-h"><span class="inum">3</span>Wire up the module</p>
+                            <p class="istep-h"><span class="inum">2</span>Wire up the module</p>
                             <p class="istep-note">The package name is <span class="mono">sofa_buffers_corelib</span>; the importable namespace is <span class="mono">sofab</span> — <span class="mono">const sofab = @import("sofab");</span></p>
                             <div class="code-card">
                                 <div class="code-head">
@@ -1631,9 +1227,20 @@ person2 = <span class="t">Person</span>.<span class="k">deserialize</span>(data)
                         var on = p.id === want;
                         p.classList.toggle('is-active', on);
                         if (on) { p.removeAttribute('hidden'); } else { p.setAttribute('hidden', ''); }
+                        if (on) { syncOsBar(p); }
                     });
                 });
             });
+
+            var osBar = box.querySelector('.install-osbar');
+            function syncOsBar(panel) {
+                if (panel.getAttribute('data-noos')) {
+                    osBar.setAttribute('hidden', '');
+                } else {
+                    osBar.removeAttribute('hidden');
+                }
+            }
+            syncOsBar(box.querySelector('.ipanel.is-active'));
 
             var osBtns = box.querySelectorAll('.osbtn');
             function setOs(os) {
