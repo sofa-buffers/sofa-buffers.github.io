@@ -320,6 +320,90 @@
         }
         .lang small { display: block; color: var(--fg-dim); font-weight: 500; font-size: 0.78rem; }
 
+        /* ---------- Install box (tabbed, per-OS instructions) ---------- */
+        .install-box {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden;
+        }
+        .install-tabs {
+            display: flex; flex-wrap: wrap; gap: 0.4rem;
+            padding: 0.9rem 1rem; background: var(--surface-2); border-bottom: 1px solid var(--border);
+        }
+        .itab {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: transparent; border: 1px solid transparent; border-radius: 10px;
+            padding: 0.42rem 0.75rem; color: var(--fg-muted); font: inherit; font-size: 0.92rem;
+            font-weight: 600; cursor: pointer; transition: all 0.2s ease;
+        }
+        .itab:hover { color: var(--fg); border-color: var(--border); }
+        .itab.is-active { color: var(--fg); background: var(--surface); border-color: var(--accent); }
+        .itab .mono { font-size: 0.86em; }
+        .ibadge {
+            width: 24px; height: 24px; flex: 0 0 24px; border-radius: 7px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.6rem; font-weight: 800; color: #fff; letter-spacing: -0.02em;
+        }
+        .install-osbar {
+            display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap;
+            padding: 0.85rem 1.5rem; border-bottom: 1px solid var(--border);
+        }
+        .os-label {
+            text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.74rem;
+            font-weight: 700; color: var(--fg-dim);
+        }
+        .os-switch {
+            display: inline-flex; gap: 3px; padding: 3px;
+            background: var(--surface-2); border: 1px solid var(--border); border-radius: 11px;
+        }
+        .osbtn {
+            background: transparent; border: 0; border-radius: 8px; padding: 0.32rem 0.9rem;
+            color: var(--fg-muted); font: inherit; font-size: 0.9rem; font-weight: 600;
+            cursor: pointer; transition: all 0.2s ease;
+        }
+        .osbtn:hover { color: var(--fg); }
+        .osbtn.is-active { background: var(--accent-soft); color: var(--accent); }
+        .ipanel { padding: 1.7rem 1.5rem 2rem; }
+        .ipanel[hidden] { display: none; }
+        .ipanel-head h3 { font-size: 1.18rem; }
+        .ipanel-head p { color: var(--fg-muted); margin: 0.35rem 0 0.5rem; max-width: 72ch; }
+        .ireq, .isame {
+            display: inline-flex; align-items: center; gap: 0.45rem;
+            font-size: 0.86rem; color: var(--fg-dim); margin: 0.15rem 0 0.15rem;
+        }
+        .ireq { margin-right: 1rem; }
+        .ireq b { color: var(--fg-muted); font-weight: 700; }
+        .isame::before {
+            content: ''; width: 15px; height: 15px; flex: 0 0 15px;
+            background: no-repeat center/13px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233ec9c0' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+        }
+        .ipanel-head .ilink { display: block; margin-top: 0.5rem; }
+        .install-osbar[hidden] { display: none; }
+        .ilink { font-size: 0.9rem; font-weight: 600; }
+        .istep { margin-top: 1.7rem; }
+        .istep-h { display: flex; align-items: center; gap: 0.65rem; font-weight: 700; }
+        .inum {
+            width: 25px; height: 25px; flex: 0 0 25px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            background: var(--accent-soft); color: var(--accent); font-size: 0.8rem; font-weight: 800;
+        }
+        .istep-note { color: var(--fg-muted); font-size: 0.94rem; margin: 0.45rem 0 0.85rem; max-width: 78ch; }
+        .icap { color: var(--fg-dim); font-size: 0.8rem; font-weight: 600; margin: 1rem 0 0.4rem; }
+        .install-box .code-card { border-radius: 12px; }
+        .install-box pre.code {
+            font-size: 0.84rem; white-space: pre-wrap; overflow-wrap: anywhere;
+        }
+        /* Only the steps for the selected OS are shown; unmarked steps always are. */
+        .istep[data-os] { display: none; }
+        .install-box[data-os="linux"]   .istep[data-os="linux"],
+        .install-box[data-os="mac"]     .istep[data-os="mac"],
+        .install-box[data-os="windows"] .istep[data-os="windows"] { display: block; }
+        @media (max-width: 640px) {
+            .install-tabs { padding: 0.7rem; }
+            .itab { font-size: 0.85rem; padding: 0.35rem 0.55rem; }
+            .ipanel { padding: 1.3rem 1rem 1.6rem; }
+            .install-osbar { padding: 0.8rem 1rem; }
+        }
+
         /* ---------- CTA band ---------- */
         .cta-band { text-align: center; padding: 5rem 1.5rem 3rem; }
         .cta-band .box {
@@ -367,6 +451,7 @@
             </a>
             <nav class="nav-links">
                 <a class="hide-sm" href="#languages">Languages</a>
+                <a class="hide-sm" href="#install">Install</a>
                 <a class="hide-sm" href="#features">Features</a>
                 <a class="hide-sm" href="#why">Why</a>
                 <a class="hide-sm" href="#format">Format</a>
@@ -427,6 +512,444 @@
                     <a class="lang" href="https://github.com/sofa-buffers/corelib-cs" target="_blank" rel="noopener"><span class="badge" style="background:#6a4d9c">C#</span><span>C#<small>Allocation-light .NET, cloud-ready</small></span></a>
                     <a class="lang" href="https://github.com/sofa-buffers/corelib-dart" target="_blank" rel="noopener"><span class="badge" style="background:#0a7ea4">Dt</span><span>Dart<small>Pure Dart, streaming, zero dependencies</small></span></a>
                     <a class="lang" href="https://github.com/sofa-buffers/corelib-zig" target="_blank" rel="noopener"><span class="badge" style="background:#f7a41d">Zig</span><span>Zig<small>Allocator-free, comptime-dispatched, max throughput</small></span></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Install ===== -->
+        <section id="install" class="wrap">
+            <div class="sec-head reveal">
+                <span class="eyebrow">Get started</span>
+                <h2 class="sec-title">Installed in one command</h2>
+                <p>Pick the generator or your core library, hit copy. Every core library is dependency-free and installs with a single command through the package manager you already use — only the generator itself differs per operating system.</p>
+            </div>
+
+            <div class="install-box reveal" id="installBox" data-os="linux">
+                <div class="install-tabs" role="tablist" aria-label="Install target">
+                    <button class="itab is-active" type="button" role="tab" id="it-generator" aria-controls="ip-generator" aria-selected="true" data-tab="generator"><span class="ibadge" style="background:#5b6ee1">gen</span>Generator</button>
+                    <button class="itab" type="button" role="tab" id="it-c-cpp" aria-controls="ip-c-cpp" aria-selected="false" data-tab="c-cpp"><span class="ibadge" style="background:#5a6fb5">C</span>C / C++</button>
+                    <button class="itab" type="button" role="tab" id="it-cpp" aria-controls="ip-cpp" aria-selected="false" data-tab="cpp"><span class="ibadge" style="background:#00599c">C++</span>C++</button>
+                    <button class="itab" type="button" role="tab" id="it-rs" aria-controls="ip-rs" aria-selected="false" data-tab="rs"><span class="ibadge" style="background:#c66a3a">Rs</span>Rust</button>
+                    <button class="itab" type="button" role="tab" id="it-rs-no-std" aria-controls="ip-rs-no-std" aria-selected="false" data-tab="rs-no-std"><span class="ibadge" style="background:#8c5733">Rs</span>Rust <span class="mono">no_std</span></button>
+                    <button class="itab" type="button" role="tab" id="it-go" aria-controls="ip-go" aria-selected="false" data-tab="go"><span class="ibadge" style="background:#2aa3c4">Go</span>Go</button>
+                    <button class="itab" type="button" role="tab" id="it-py" aria-controls="ip-py" aria-selected="false" data-tab="py"><span class="ibadge" style="background:#3f7aab">Py</span>Python</button>
+                    <button class="itab" type="button" role="tab" id="it-ts" aria-controls="ip-ts" aria-selected="false" data-tab="ts"><span class="ibadge" style="background:#2f74c0">Ts</span>TypeScript</button>
+                    <button class="itab" type="button" role="tab" id="it-java" aria-controls="ip-java" aria-selected="false" data-tab="java"><span class="ibadge" style="background:#b07219">Jv</span>Java</button>
+                    <button class="itab" type="button" role="tab" id="it-kotlin" aria-controls="ip-kotlin" aria-selected="false" data-tab="kotlin"><span class="ibadge" style="background:#7f52ff">Kt</span>Kotlin</button>
+                    <button class="itab" type="button" role="tab" id="it-cs" aria-controls="ip-cs" aria-selected="false" data-tab="cs"><span class="ibadge" style="background:#6a4d9c">C#</span>C#</button>
+                    <button class="itab" type="button" role="tab" id="it-dart" aria-controls="ip-dart" aria-selected="false" data-tab="dart"><span class="ibadge" style="background:#0a7ea4">Dt</span>Dart</button>
+                    <button class="itab" type="button" role="tab" id="it-zig" aria-controls="ip-zig" aria-selected="false" data-tab="zig"><span class="ibadge" style="background:#f7a41d">Zig</span>Zig</button>
+                </div>
+
+                <div class="install-osbar">
+                    <span class="os-label">Instructions for</span>
+                    <div class="os-switch" role="tablist" aria-label="Operating system">
+                        <button class="osbtn is-active" type="button" role="tab" aria-selected="true" data-os="linux">Linux</button>
+                        <button class="osbtn" type="button" role="tab" aria-selected="false" data-os="mac">macOS</button>
+                        <button class="osbtn" type="button" role="tab" aria-selected="false" data-os="windows">Windows</button>
+                    </div>
+                </div>
+
+                <div class="install-panels">
+                    <div class="ipanel is-active" id="ip-generator" role="tabpanel" aria-labelledby="it-generator">
+                        <div class="ipanel-head">
+                            <h3>SofaBuffers Code Generator</h3>
+                            <p><span class="mono">sofabgen</span> is a single static binary with no runtime dependencies. It turns a YAML/JSON object definition into typed code for every supported language.</p>
+                            <p class="ireq"><b>Requires</b> Nothing at all — the binary is self-contained</p>
+                            <a class="ilink" href="https://github.com/sofa-buffers/generator" target="_blank" rel="noopener">Full README on GitHub &rarr;</a>
+                        </div>
+                        <div class="istep" data-os="linux">
+                            <p class="istep-h"><span class="inum">1</span>Install the CLI</p>
+                            <p class="istep-note">Detects your OS and architecture, verifies the SHA-256 and drops the binary on your <span class="mono">PATH</span>. Set <span class="mono">SOFABGEN_VERSION</span> to pin a release, <span class="mono">SOFABGEN_INSTALL_DIR</span> to choose where it lands.</p>
+                            <div class="code-card">
+                                <div class="code-head">
+                                    <div class="dots"><span></span><span></span><span></span></div>
+                                    <span class="fname">bash</span>
+                                    <button class="copy" type="button">Copy</button>
+                                </div>
+<pre class="code">curl -fsSL https://raw.githubusercontent.com/sofa-buffers/generator/main/install.sh | sh</pre>
+                            </div>
+                        </div>
+                        <div class="istep" data-os="mac">
+                            <p class="istep-h"><span class="inum">1</span>Install the CLI</p>
+                            <p class="istep-note">Detects your OS and architecture, verifies the SHA-256 and drops the binary on your <span class="mono">PATH</span>. Set <span class="mono">SOFABGEN_VERSION</span> to pin a release, <span class="mono">SOFABGEN_INSTALL_DIR</span> to choose where it lands.</p>
+                            <div class="code-card">
+                                <div class="code-head">
+                                    <div class="dots"><span></span><span></span><span></span></div>
+                                    <span class="fname">zsh</span>
+                                    <button class="copy" type="button">Copy</button>
+                                </div>
+<pre class="code">curl -fsSL https://raw.githubusercontent.com/sofa-buffers/generator/main/install.sh | sh</pre>
+                            </div>
+                        </div>
+                        <div class="istep" data-os="windows">
+                            <p class="istep-h"><span class="inum">1</span>Install the CLI</p>
+                            <p class="istep-note">There is no install script for Windows — this pulls the released binary straight into a folder that is already on your <span class="mono">PATH</span>. On an ARM machine swap in <span class="mono">sofabgen-windows-arm64.exe</span>.</p>
+                            <div class="code-card">
+                                <div class="code-head">
+                                    <div class="dots"><span></span><span></span><span></span></div>
+                                    <span class="fname">PowerShell</span>
+                                    <button class="copy" type="button">Copy</button>
+                                </div>
+<pre class="code">$dst = "$env:LOCALAPPDATA\Microsoft\WindowsApps\sofabgen.exe"
+Invoke-WebRequest "https://github.com/sofa-buffers/generator/releases/latest/download/sofabgen-windows-amd64.exe" -OutFile $dst</pre>
+                            </div>
+                        </div>
+                        <div class="istep">
+                            <p class="istep-h"><span class="inum">2</span>Or use the channel you already manage tools with</p>
+                            <p class="istep-note">Every channel ships the <strong>same</strong> binary from the same release — pick one.</p>
+                            <p class="icap">npm — pinned per project</p>
+                            <div class="code-card">
+                                <div class="code-head">
+                                    <div class="dots"><span></span><span></span><span></span></div>
+                                    <span class="fname">any shell</span>
+                                    <button class="copy" type="button">Copy</button>
+                                </div>
+<pre class="code">npm install --save-dev @sofa-buffers/generator</pre>
+                            </div>
+                            <p class="icap">PyPI — standalone CLI</p>
+                            <div class="code-card">
+                                <div class="code-head">
+                                    <div class="dots"><span></span><span></span><span></span></div>
+                                    <span class="fname">any shell</span>
+                                    <button class="copy" type="button">Copy</button>
+                                </div>
+<pre class="code">uv tool install sofabgen   <span class="c"># or: pipx install sofabgen</span></pre>
+                            </div>
+                            <p class="icap">Go toolchain</p>
+                            <div class="code-card">
+                                <div class="code-head">
+                                    <div class="dots"><span></span><span></span><span></span></div>
+                                    <span class="fname">any shell</span>
+                                    <button class="copy" type="button">Copy</button>
+                                </div>
+<pre class="code">go install github.com/sofa-buffers/generator/cmd/sofabgen@latest</pre>
+                            </div>
+                        </div>
+                        <div class="istep">
+                            <p class="istep-h"><span class="inum">3</span>Generate typed sources</p>
+                            <p class="istep-note">One flag per language — <span class="mono">c</span>, <span class="mono">cpp</span>, <span class="mono">go</span>, <span class="mono">python</span>, <span class="mono">typescript</span>, <span class="mono">rust</span>, <span class="mono">csharp</span>, <span class="mono">java</span>, <span class="mono">kotlin</span>, <span class="mono">zig</span>, <span class="mono">dart</span> — or <span class="mono">docs</span> for a self-contained HTML reference page.</p>
+                            <div class="code-card">
+                                <div class="code-head">
+                                    <div class="dots"><span></span><span></span><span></span></div>
+                                    <span class="fname">any shell</span>
+                                    <button class="copy" type="button">Copy</button>
+                                </div>
+<pre class="code">sofabgen --version
+sofabgen --lang rust --in messages/ --out src/generated/</pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ipanel" id="ip-c-cpp" role="tabpanel" aria-labelledby="it-c-cpp" data-noos="1" hidden>
+                        <div class="ipanel-head">
+                            <h3>corelib-c-cpp</h3>
+                            <p>Heap-free C99 object API plus a header-only C++20 wrapper over the same core — for bare-metal MCUs up to IoT-class devices.</p>
+                            <p class="ireq"><b>Requires</b> A C99 and/or C++20 compiler (GCC or Clang) · CMake 3.10+ only for tests, benchmarks and docs</p>
+                            <p class="isame">Same command on Linux, macOS and Windows</p>
+                            <a class="ilink" href="https://github.com/sofa-buffers/corelib-c-cpp" target="_blank" rel="noopener">Full README on GitHub &rarr;</a>
+                        </div>
+                        <div class="istep">
+                            <p class="istep-h">Pull it into your build</p>
+                            <p class="istep-note">Distributed as the port <span class="mono">sofa-buffers-corelib-c-cpp</span>; every route exposes the same target <span class="mono">sofa-buffers::corelib</span> and <span class="mono">#include &lt;sofab/…&gt;</span>. Also packaged for Conan, Arduino and PlatformIO.</p>
+                            <div class="code-card">
+                                <div class="code-head">
+                                    <div class="dots"><span></span><span></span><span></span></div>
+                                    <span class="fname">CMakeLists.txt</span>
+                                    <button class="copy" type="button">Copy</button>
+                                </div>
+<pre class="code">include(FetchContent)
+FetchContent_Declare(
+  sofa-buffers-corelib-c-cpp
+  GIT_REPOSITORY https://github.com/sofa-buffers/corelib-c-cpp.git
+  GIT_TAG        main
+)
+FetchContent_MakeAvailable(sofa-buffers-corelib-c-cpp)
+target_link_libraries(my_app PRIVATE sofa-buffers::corelib)</pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ipanel" id="ip-cpp" role="tabpanel" aria-labelledby="it-cpp" data-noos="1" hidden>
+                        <div class="ipanel-head">
+                            <h3>corelib-cpp</h3>
+                            <p>Written from scratch with no C backend and tuned for raw throughput.</p>
+                            <p class="ireq"><b>Requires</b> A C++20 compiler — GCC 11+, Clang 14+ or MSVC 19.30+ · header-only, no build step</p>
+                            <p class="isame">Same command on Linux, macOS and Windows</p>
+                            <a class="ilink" href="https://github.com/sofa-buffers/corelib-cpp" target="_blank" rel="noopener">Full README on GitHub &rarr;</a>
+                        </div>
+                        <div class="istep">
+                            <p class="istep-h">Pull it into your build</p>
+                            <p class="istep-note">Distributed as the port <span class="mono">sofa-buffers-corelib-cpp</span>. A Conan package of the same name installs a CMake config exposing the same <span class="mono">sofa-buffers::corelib</span> target.</p>
+                            <div class="code-card">
+                                <div class="code-head">
+                                    <div class="dots"><span></span><span></span><span></span></div>
+                                    <span class="fname">CMakeLists.txt</span>
+                                    <button class="copy" type="button">Copy</button>
+                                </div>
+<pre class="code">include(FetchContent)
+FetchContent_Declare(
+  sofa-buffers-corelib-cpp
+  GIT_REPOSITORY https://github.com/sofa-buffers/corelib-cpp.git
+  GIT_TAG        main
+)
+FetchContent_MakeAvailable(sofa-buffers-corelib-cpp)
+target_link_libraries(my_app PRIVATE sofa-buffers::corelib)</pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ipanel" id="ip-rs" role="tabpanel" aria-labelledby="it-rs" data-noos="1" hidden>
+                        <div class="ipanel-head">
+                            <h3>corelib-rs</h3>
+                            <p>The high-speed <span class="mono">std</span> build for big machines — the standard library and nothing else at runtime.</p>
+                            <p class="ireq"><b>Requires</b> Rust 1.70+, edition 2021</p>
+                            <p class="isame">Same command on Linux, macOS and Windows</p>
+                            <a class="ilink" href="https://github.com/sofa-buffers/corelib-rs" target="_blank" rel="noopener">Full README on GitHub &rarr;</a>
+                        </div>
+                        <div class="istep">
+                            <p class="istep-h">Add the crate</p>
+                            <p class="istep-note">Published on crates.io as <span class="mono">sofa-buffers-corelib</span>; the importable namespace is <span class="mono">sofab</span> — <span class="mono">use sofab::{OStream, decode};</span></p>
+                            <div class="code-card">
+                                <div class="code-head">
+                                    <div class="dots"><span></span><span></span><span></span></div>
+                                    <span class="fname">any shell</span>
+                                    <button class="copy" type="button">Copy</button>
+                                </div>
+<pre class="code">cargo add sofa-buffers-corelib</pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ipanel" id="ip-rs-no-std" role="tabpanel" aria-labelledby="it-rs-no-std" data-noos="1" hidden>
+                        <div class="ipanel-head">
+                            <h3>corelib-rs-no-std</h3>
+                            <p><span class="mono">core</span>-only, no allocator, <span class="mono">#![forbid(unsafe_code)]</span> — for microcontrollers.</p>
+                            <p class="ireq"><b>Requires</b> Rust 1.70+ (MSRV), edition 2021, stable</p>
+                            <p class="isame">Same command on Linux, macOS and Windows</p>
+                            <a class="ilink" href="https://github.com/sofa-buffers/corelib-rs-no-std" target="_blank" rel="noopener">Full README on GitHub &rarr;</a>
+                        </div>
+                        <div class="istep">
+                            <p class="istep-h"><span class="inum">1</span>Add the crate</p>
+                            <p class="istep-note">The crates.io package is <span class="mono">sofa-buffers-corelib-no-std</span>; the crate you <span class="mono">use</span> is <span class="mono">sofab</span>.</p>
+                            <div class="code-card">
+                                <div class="code-head">
+                                    <div class="dots"><span></span><span></span><span></span></div>
+                                    <span class="fname">bash</span>
+                                    <button class="copy" type="button">Copy</button>
+                                </div>
+<pre class="code">cargo add sofa-buffers-corelib-no-std</pre>
+                            </div>
+                        </div>
+                        <div class="istep">
+                            <p class="istep-h"><span class="inum">2</span>Add your bare-metal target</p>
+                            <p class="istep-note">Builds on any target — <span class="mono">thumbv6m</span>, <span class="mono">thumbv7em</span>, <span class="mono">riscv32imc</span> and friends. Nothing is boxed, so there is no <span class="mono">alloc</span> to provide.</p>
+                            <div class="code-card">
+                                <div class="code-head">
+                                    <div class="dots"><span></span><span></span><span></span></div>
+                                    <span class="fname">any shell</span>
+                                    <button class="copy" type="button">Copy</button>
+                                </div>
+<pre class="code">rustup target add thumbv7em-none-eabihf</pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ipanel" id="ip-go" role="tabpanel" aria-labelledby="it-go" data-noos="1" hidden>
+                        <div class="ipanel-head">
+                            <h3>corelib-go</h3>
+                            <p>Streaming, dependency-free runtime core — standard library only, no cgo.</p>
+                            <p class="ireq"><b>Requires</b> Go 1.21+</p>
+                            <p class="isame">Same command on Linux, macOS and Windows</p>
+                            <a class="ilink" href="https://github.com/sofa-buffers/corelib-go" target="_blank" rel="noopener">Full README on GitHub &rarr;</a>
+                        </div>
+                        <div class="istep">
+                            <p class="istep-h">Add the module</p>
+                            <p class="istep-note">The module path is <span class="mono">github.com/sofa-buffers/corelib-go</span>; the imported package is <span class="mono">sofab</span> — <span class="mono">import sofab "github.com/sofa-buffers/corelib-go"</span></p>
+                            <div class="code-card">
+                                <div class="code-head">
+                                    <div class="dots"><span></span><span></span><span></span></div>
+                                    <span class="fname">any shell</span>
+                                    <button class="copy" type="button">Copy</button>
+                                </div>
+<pre class="code">go get github.com/sofa-buffers/corelib-go</pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ipanel" id="ip-py" role="tabpanel" aria-labelledby="it-py" data-noos="1" hidden>
+                        <div class="ipanel-head">
+                            <h3>corelib-py</h3>
+                            <p>Pure Python with zero runtime dependencies, plus an optional native accelerator.</p>
+                            <p class="ireq"><b>Requires</b> Python 3.9+ (CPython or PyPy)</p>
+                            <p class="isame">Same command on Linux, macOS and Windows</p>
+                            <a class="ilink" href="https://github.com/sofa-buffers/corelib-py" target="_blank" rel="noopener">Full README on GitHub &rarr;</a>
+                        </div>
+                        <div class="istep">
+                            <p class="istep-h">Install the package</p>
+                            <p class="istep-note">Distribution <span class="mono">sofa-buffers-corelib</span> on PyPI; the import package is <span class="mono">sofab</span>.</p>
+                            <div class="code-card">
+                                <div class="code-head">
+                                    <div class="dots"><span></span><span></span><span></span></div>
+                                    <span class="fname">any shell</span>
+                                    <button class="copy" type="button">Copy</button>
+                                </div>
+<pre class="code">pip install sofa-buffers-corelib</pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ipanel" id="ip-ts" role="tabpanel" aria-labelledby="it-ts" data-noos="1" hidden>
+                        <div class="ipanel-head">
+                            <h3>corelib-ts</h3>
+                            <p>Runs on Node, browsers, Deno and Bun. Zero runtime dependencies, ESM + CJS + browser IIFE.</p>
+                            <p class="ireq"><b>Requires</b> Node 20+ — or any modern browser, Deno or Bun</p>
+                            <p class="isame">Same command on Linux, macOS and Windows</p>
+                            <a class="ilink" href="https://github.com/sofa-buffers/corelib-ts" target="_blank" rel="noopener">Full README on GitHub &rarr;</a>
+                        </div>
+                        <div class="istep">
+                            <p class="istep-h">Install the package</p>
+                            <p class="istep-note">Ships ESM (<span class="mono">.js</span>), CommonJS (<span class="mono">.cjs</span>), a browser IIFE global (<span class="mono">SofaBuffers</span>) and full type declarations.</p>
+                            <div class="code-card">
+                                <div class="code-head">
+                                    <div class="dots"><span></span><span></span><span></span></div>
+                                    <span class="fname">any shell</span>
+                                    <button class="copy" type="button">Copy</button>
+                                </div>
+<pre class="code">npm install @sofa-buffers/corelib</pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ipanel" id="ip-java" role="tabpanel" aria-labelledby="it-java" data-noos="1" hidden>
+                        <div class="ipanel-head">
+                            <h3>corelib-java</h3>
+                            <p>Allocation-light and runs anywhere a JVM does. Runtime dependencies: none.</p>
+                            <p class="ireq"><b>Requires</b> JDK 17+</p>
+                            <p class="isame">Same command on Linux, macOS and Windows</p>
+                            <a class="ilink" href="https://github.com/sofa-buffers/corelib-java" target="_blank" rel="noopener">Full README on GitHub &rarr;</a>
+                        </div>
+                        <div class="istep">
+                            <p class="istep-h">Declare the dependency</p>
+                            <p class="istep-note">Maven coordinates <span class="mono">org.sofabuffers:corelib</span>; the import namespace is the package <span class="mono">org.sofabuffers.sofab</span>.</p>
+                            <p class="icap">Maven</p>
+                            <div class="code-card">
+                                <div class="code-head">
+                                    <div class="dots"><span></span><span></span><span></span></div>
+                                    <span class="fname">pom.xml</span>
+                                    <button class="copy" type="button">Copy</button>
+                                </div>
+<pre class="code">&lt;dependency&gt;
+  &lt;groupId&gt;org.sofabuffers&lt;/groupId&gt;
+  &lt;artifactId&gt;corelib&lt;/artifactId&gt;
+  &lt;version&gt;0.10.0&lt;/version&gt;
+&lt;/dependency&gt;</pre>
+                            </div>
+                            <p class="icap">Gradle</p>
+                            <div class="code-card">
+                                <div class="code-head">
+                                    <div class="dots"><span></span><span></span><span></span></div>
+                                    <span class="fname">build.gradle.kts</span>
+                                    <button class="copy" type="button">Copy</button>
+                                </div>
+<pre class="code">implementation("org.sofabuffers:corelib:0.10.0")</pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ipanel" id="ip-kotlin" role="tabpanel" aria-labelledby="it-kotlin" data-noos="1" hidden>
+                        <div class="ipanel-head">
+                            <h3>corelib-kotlin-mp</h3>
+                            <p>One multiplatform codec for JVM, JS and native targets — Kotlin standard library and nothing else.</p>
+                            <p class="ireq"><b>Requires</b> JDK 17+ · the Gradle wrapper pins Kotlin 2.4+ and Gradle 8.14.4+</p>
+                            <p class="isame">Same command on Linux, macOS and Windows</p>
+                            <a class="ilink" href="https://github.com/sofa-buffers/corelib-kotlin-mp" target="_blank" rel="noopener">Full README on GitHub &rarr;</a>
+                        </div>
+                        <div class="istep">
+                            <p class="istep-h">Declare the dependency</p>
+                            <p class="istep-note">Built and tested for <span class="mono">jvm</span>, <span class="mono">js</span> (Node + browser), <span class="mono">linuxX64</span> and <span class="mono">linuxArm64</span>; the import namespace is <span class="mono">org.sofabuffers.sofab</span>.</p>
+                            <div class="code-card">
+                                <div class="code-head">
+                                    <div class="dots"><span></span><span></span><span></span></div>
+                                    <span class="fname">build.gradle.kts</span>
+                                    <button class="copy" type="button">Copy</button>
+                                </div>
+<pre class="code">dependencies {
+    implementation("org.sofabuffers:corelib-kotlin-mp:0.1.0")
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ipanel" id="ip-cs" role="tabpanel" aria-labelledby="it-cs" data-noos="1" hidden>
+                        <div class="ipanel-head">
+                            <h3>corelib-cs</h3>
+                            <p>Allocation-light .NET with no reflection and no runtime codegen — friendly to trimming and Native AOT.</p>
+                            <p class="ireq"><b>Requires</b> .NET 9 or later</p>
+                            <p class="isame">Same command on Linux, macOS and Windows</p>
+                            <a class="ilink" href="https://github.com/sofa-buffers/corelib-cs" target="_blank" rel="noopener">Full README on GitHub &rarr;</a>
+                        </div>
+                        <div class="istep">
+                            <p class="istep-h">Add the package</p>
+                            <p class="istep-note">NuGet id <span class="mono">SofaBuffers.Corelib</span>; the assembly is <span class="mono">SofaBuffers.dll</span> and the public API lives under the <span class="mono">sofab</span> namespace.</p>
+                            <div class="code-card">
+                                <div class="code-head">
+                                    <div class="dots"><span></span><span></span><span></span></div>
+                                    <span class="fname">any shell</span>
+                                    <button class="copy" type="button">Copy</button>
+                                </div>
+<pre class="code">dotnet add package SofaBuffers.Corelib</pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ipanel" id="ip-dart" role="tabpanel" aria-labelledby="it-dart" data-noos="1" hidden>
+                        <div class="ipanel-head">
+                            <h3>corelib-dart</h3>
+                            <p>Pure Dart, streaming, zero runtime dependencies.</p>
+                            <p class="ireq"><b>Requires</b> Dart SDK 3.8.0 or newer</p>
+                            <p class="isame">Same command on Linux, macOS and Windows</p>
+                            <a class="ilink" href="https://github.com/sofa-buffers/corelib-dart" target="_blank" rel="noopener">Full README on GitHub &rarr;</a>
+                        </div>
+                        <div class="istep">
+                            <p class="istep-h">Add the package</p>
+                            <p class="istep-note">pub.dev requires lowercase names, so the published package is <span class="mono">sofabuffers</span> — you install <span class="mono">sofabuffers</span> and import it as <span class="mono">sofab</span>.</p>
+                            <div class="code-card">
+                                <div class="code-head">
+                                    <div class="dots"><span></span><span></span><span></span></div>
+                                    <span class="fname">any shell</span>
+                                    <button class="copy" type="button">Copy</button>
+                                </div>
+<pre class="code">dart pub add sofabuffers</pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ipanel" id="ip-zig" role="tabpanel" aria-labelledby="it-zig" data-noos="1" hidden>
+                        <div class="ipanel-head">
+                            <h3>corelib-zig</h3>
+                            <p>Allocator-free and comptime-dispatched for maximum throughput — Zig standard library only.</p>
+                            <p class="ireq"><b>Requires</b> Zig 0.16.0 or newer</p>
+                            <p class="isame">Same command on Linux, macOS and Windows</p>
+                            <a class="ilink" href="https://github.com/sofa-buffers/corelib-zig" target="_blank" rel="noopener">Full README on GitHub &rarr;</a>
+                        </div>
+                        <div class="istep">
+                            <p class="istep-h"><span class="inum">1</span>Fetch the package</p>
+                            <p class="istep-note">Pin the release with the <span class="mono">#</span>-ref — without one, <span class="mono">zig fetch</span> resolves whatever the default branch points at right then. <span class="mono">--save</span> writes the resolved hash into your <span class="mono">build.zig.zon</span>.</p>
+                            <div class="code-card">
+                                <div class="code-head">
+                                    <div class="dots"><span></span><span></span><span></span></div>
+                                    <span class="fname">any shell</span>
+                                    <button class="copy" type="button">Copy</button>
+                                </div>
+<pre class="code">zig fetch --save git+https://github.com/sofa-buffers/corelib-zig#v0.10.0</pre>
+                            </div>
+                        </div>
+                        <div class="istep">
+                            <p class="istep-h"><span class="inum">2</span>Wire up the module</p>
+                            <p class="istep-note">The package name is <span class="mono">sofa_buffers_corelib</span>; the importable namespace is <span class="mono">sofab</span> — <span class="mono">const sofab = @import("sofab");</span></p>
+                            <div class="code-card">
+                                <div class="code-head">
+                                    <div class="dots"><span></span><span></span><span></span></div>
+                                    <span class="fname">build.zig</span>
+                                    <button class="copy" type="button">Copy</button>
+                                </div>
+<pre class="code">const corelib = b.dependency("sofa_buffers_corelib", .{
+    .target = target,
+    .optimize = optimize,
+});
+exe.root_module.addImport("sofab", corelib.module("sofab"));</pre>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -613,6 +1136,7 @@ person2 = <span class="t">Person</span>.<span class="k">deserialize</span>(data)
             <div class="foot-cols">
                 <div class="foot-col">
                     <h4>Project</h4>
+                    <a href="#install">Install guide</a>
                     <a href="https://github.com/sofa-buffers" target="_blank" rel="noopener">GitHub Organization</a>
                     <a href="https://github.com/sofa-buffers/documentation" target="_blank" rel="noopener">Documentation</a>
                     <a href="https://github.com/sofa-buffers/documentation/blob/main/CORELIB_PLAN.md" target="_blank" rel="noopener">Wire Format Spec</a>
@@ -672,15 +1196,79 @@ person2 = <span class="t">Person</span>.<span class="k">deserialize</span>(data)
         // ---- Copy buttons ----
         document.querySelectorAll('.copy').forEach(function (btn) {
             btn.addEventListener('click', function () {
-                var el = document.querySelector(btn.getAttribute('data-copy'));
-                if (!el) return;
-                navigator.clipboard.writeText(el.innerText).then(function () {
+                var sel = btn.getAttribute('data-copy');
+                var scope = btn.closest('.code-card');
+                var el = sel ? document.querySelector(sel) : (scope && scope.querySelector('pre.code'));
+                if (!el || !navigator.clipboard) return;
+                navigator.clipboard.writeText(el.textContent).then(function () {
                     var old = btn.textContent;
                     btn.textContent = 'Copied!';
                     setTimeout(function () { btn.textContent = old; }, 1400);
                 });
             });
         });
+
+        // ---- Install box (target tabs + OS switch, remembers the OS) ----
+        (function () {
+            var box = document.getElementById('installBox');
+            if (!box) return;
+
+            var tabs = box.querySelectorAll('.itab');
+            var panels = box.querySelectorAll('.ipanel');
+            tabs.forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    tabs.forEach(function (b) {
+                        var on = b === btn;
+                        b.classList.toggle('is-active', on);
+                        b.setAttribute('aria-selected', on ? 'true' : 'false');
+                    });
+                    var want = 'ip-' + btn.getAttribute('data-tab');
+                    panels.forEach(function (p) {
+                        var on = p.id === want;
+                        p.classList.toggle('is-active', on);
+                        if (on) { p.removeAttribute('hidden'); } else { p.setAttribute('hidden', ''); }
+                        if (on) { syncOsBar(p); }
+                    });
+                });
+            });
+
+            var osBar = box.querySelector('.install-osbar');
+            function syncOsBar(panel) {
+                if (panel.getAttribute('data-noos')) {
+                    osBar.setAttribute('hidden', '');
+                } else {
+                    osBar.removeAttribute('hidden');
+                }
+            }
+            syncOsBar(box.querySelector('.ipanel.is-active'));
+
+            var osBtns = box.querySelectorAll('.osbtn');
+            function setOs(os) {
+                box.setAttribute('data-os', os);
+                osBtns.forEach(function (b) {
+                    var on = b.getAttribute('data-os') === os;
+                    b.classList.toggle('is-active', on);
+                    b.setAttribute('aria-selected', on ? 'true' : 'false');
+                });
+            }
+            osBtns.forEach(function (b) {
+                b.addEventListener('click', function () {
+                    var os = b.getAttribute('data-os');
+                    setOs(os);
+                    try { localStorage.setItem('sb-os', os); } catch (e) {}
+                });
+            });
+
+            var stored = null;
+            try { stored = localStorage.getItem('sb-os'); } catch (e) {}
+            if (!stored) {
+                var ua = navigator.userAgent || '';
+                stored = /Windows/i.test(ua) ? 'windows'
+                       : /Mac OS X|iPhone|iPad/i.test(ua) ? 'mac'
+                       : 'linux';
+            }
+            setOs(stored);
+        })();
 
         // ---- Scroll reveal ----
         (function () {
