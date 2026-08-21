@@ -13,7 +13,8 @@ The page describes the SofaBuffers project. The authoritative facts come from th
 | Source | URL | What to pull from it |
 |--------|-----|----------------------|
 | Org repo list | `https://api.github.com/orgs/sofa-buffers/repos?per_page=100` | **The canonical core-library list.** Every repo whose name starts with `corelib-` is one card in the language grid — nothing else is. Also gives each repo's one-line `description`. |
-| Per-corelib README | `https://raw.githubusercontent.com/sofa-buffers/<corelib-repo>/main/README.md` | The **distinguishing blurb** for each card (the `<small>` line). Read the intro paragraph after the `## SofaBuffers <Lang> library` heading — it says what makes this build different (target, std vs no_std, speed vs size, runtimes). |
+| Per-corelib README | `https://raw.githubusercontent.com/sofa-buffers/<corelib-repo>/main/README.md` | The **distinguishing blurb** for each card (the `<small>` line). Read the intro paragraph after the `## SofaBuffers <Lang> library` heading — it says what makes this build different (target, std vs no_std, speed vs size, runtimes). Also the **install facts** for that language's tab in the install box (§3H): the `### Requirements`, `### Dependencies` and `### Packaging` / `### Package name` / `### Targets and coordinates` sections. |
+| Generator README | https://raw.githubusercontent.com/sofa-buffers/generator/main/README.md | The **`## Installation`** chapter — install channels (script, npm, PyPI, GitHub Actions, Go toolchain, source) and the `sofabgen` CLI flags. Drives the *Generator* tab of the install box (§3H). |
 | Documentation README | https://raw.githubusercontent.com/sofa-buffers/documentation/main/README.md | Feature list, why-it-exists, format comparison |
 | Corelib plan / wire spec | https://raw.githubusercontent.com/sofa-buffers/documentation/main/CORELIB_PLAN.md | Wire types, varint/zig-zag, sequences, API constants, generated-object API |
 | Message spec | https://raw.githubusercontent.com/sofa-buffers/documentation/main/MESSAGE_SPEC.md | How schema types (structs, unions, enums, arrays, maps) map onto the wire primitives, and when a field is written at all |
@@ -96,6 +97,30 @@ The **"Quality & performance"** section has two cards backed by two ecosystem re
 
 Like the generator, these are ecosystem components, **not** corelibs — keep them out of the `.lang-grid` and out of both counts in §3A. Keep the copy qualitative: **no hard numbers** (throughput figures, byte sizes, finding counts) — the READMEs carry the specifics; the page just says we prove correctness and track performance. Re-read both READMEs before editing these cards.
 
+### H. The install box (`#install`)
+
+The **"Get started"** section holds one tabbed box: a tab per install target (**the generator + every `corelib-*` repo**, so `12 + 1 = 13` tabs today) and a global **Linux / macOS / Windows** switch. It is plain static markup — every tab and every OS variant is in the HTML; JS only toggles classes, and the OS choice is remembered in `localStorage` under `sb-os`.
+
+Structure of one tab (`.ipanel`):
+
+- `.ipanel-head` — repo name, one-line blurb, "Full README on GitHub" link.
+- `.istep` blocks. A step carrying `data-os="linux|mac|windows"` is shown **only** for that OS (three sibling copies, one per OS); a step **without** `data-os` is shown for every OS. Step numbers are written out literally in `.inum` — renumber by hand when adding or removing a step.
+- Each command sits in the page's standard `.code-card` + `<pre class="code">`. The copy button needs **no** `data-copy` when it is inside a `.code-card` (it grabs the sibling `<pre>`); the two older code cards in "Under the hood" still use `data-copy="#id"` and both paths work.
+
+**A new tab means:** copy the nearest existing `.ipanel`, give it `id="ip-<slug>"`, add the matching `<button class="itab" … data-tab="<slug>">` (reuse the `.badge` colour from that language's `.lang-grid` card), and keep the tab order in step with the grid order.
+
+**What drifts here — re-read the source README every time:**
+
+| Data point | Where it comes from |
+|---|---|
+| Install command / package id (`cargo add sofa-buffers-corelib`, `npm install @sofa-buffers/corelib`, `pip install sofa-buffers-corelib`, `go get …`, `dotnet add package SofaBuffers.Corelib`, `dart pub add sofabuffers`, `zig fetch --save …`) | that corelib's `### Packaging` / `### Package name` section |
+| **Pinned versions** — Java `0.10.0`, Kotlin `0.1.0`, Zig `#v0.10.0` | same; these are the ones most likely to go stale |
+| Minimum toolchain version quoted in the note (Rust 1.70+, Go 1.21+, Python 3.9+, Node 20+, JDK 17+, .NET 9+, Dart 3.8+, Zig 0.16+, C++20) | that corelib's `### Requirements` section |
+| Generator install channels + the `--lang` value list | the generator README's `## Installation` and `## Quick start` |
+| Generator Windows one-liner | the release asset naming (`sofabgen-windows-amd64.exe`); it downloads via `releases/latest/download/…` on purpose, so it never needs a version bump |
+
+The per-OS **toolchain** commands (`apt`, `brew`, `winget`, `choco`, `snap`) are ecosystem knowledge, not repo facts — leave them alone unless one actually breaks, and keep the official-download link in the note next to any that is distro-specific.
+
 ---
 
 ## 4. Things that must NOT change (unless the user explicitly asks)
@@ -133,6 +158,8 @@ grep -oE "https://github.com/sofa-buffers/[a-z0-9-]+" index.html | sort -u
 # 4. Optional visual check — serve and look
 python3 -m http.server 8000   # then open http://localhost:8000
 ```
+
+Confirm the install box (§3H) has one tab per `corelib-*` repo plus the generator, and that each tab still has a Linux, a macOS **and** a Windows variant of its OS-specific step.
 
 Confirm both counts from §3A are consistent: the **library** count (number of `corelib-*` repos = number of grid cards) and the **distinct-language** count (hero stat digit = heading word = JSON-LD array length). Remember they differ whenever a language has more than one build.
 
