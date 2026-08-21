@@ -144,7 +144,20 @@ GitHub Pages publishes from the **`main` branch, root path**. So:
 
 1. Branch off `main`, commit with a plain message (**no Co-Authored-By / AI trailer**).
 2. Push and open a PR (`gh` or the API). The user supplies a token when needed — **never commit or hard-code a token**, and remind them to revoke it afterward.
-3. **Merging the PR to `main` deploys to production** (`https://sofa-buffers.github.io`). Only merge when the user explicitly says so. After merge, Pages takes ~1–4 minutes to rebuild; verify the live site reflects the change (and suggest a hard refresh).
+3. **Merging the PR to `main` deploys to production** (`https://sofabuffers.org`). Only merge when the user explicitly says so. After merge, Pages takes ~1–4 minutes to rebuild; verify the live site reflects the change (and suggest a hard refresh).
+
+
+### The custom domain
+
+The site is served from **`sofabuffers.org`** (apex), configured by the `CNAME` file in the repo root:
+
+- **Never delete or rename `CNAME`.** Removing it unsets the custom domain in the Pages settings and the site falls back to `sofa-buffers.github.io`.
+- The apex domain needs these DNS records at the registrar (GitHub Pages' documented apex addresses):
+  `A` → `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
+  `AAAA` → `2606:50c0:8000::153`, `2606:50c0:8001::153`, `2606:50c0:8002::153`, `2606:50c0:8003::153`
+  plus `CNAME www → sofa-buffers.github.io.` if the `www` host should redirect.
+- After DNS resolves, enable **Enforce HTTPS** in the repo's Pages settings (GitHub provisions the Let's Encrypt cert automatically; can take up to ~24 h).
+- `sofa-buffers.github.io` keeps working — GitHub redirects it to the custom domain. Absolute URLs in `index.html` (`canonical`, `og:url`, JSON-LD `url`), `sitemap.xml` and `robots.txt` must all use the custom domain; grep for `sofabuffers.org` to find them.
 
 ---
 

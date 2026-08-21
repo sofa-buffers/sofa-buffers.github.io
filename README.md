@@ -2,7 +2,7 @@
 
 > **Structured Objects For Anyone** — a compact, streaming-first binary serialization format for structured data.
 
-This repository hosts the [SofaBuffers organization GitHub Pages site](https://sofa-buffers.github.io) — a single, dependency-free `index.html` (plain HTML, CSS and JS) that introduces the project.
+This repository hosts the [SofaBuffers organization GitHub Pages site](https://sofabuffers.org) — a single, dependency-free `index.html` (plain HTML, CSS and JS) that introduces the project.
 
 ## About SofaBuffers
 
